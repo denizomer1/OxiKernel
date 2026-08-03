@@ -185,48 +185,10 @@ BUILD_PACKAGE() {
     script_echo " "
     script_echo "I: Creating kernel ZIP..."
 
-    # Import kernel image
-    mv "$TOP/arch/arm64/boot/Image" "$TMP_DIR"
+    cp "$OUT_DIR/boot.img" "$TMP_DIR/boot.img"
+    cp "$TOP/arch/arm64/boot/dtb_exynos.img" "$TMP_DIR/dtb.img"
+    cp -r "$TOP/tools/make/package/META-INF" "$TMP_DIR/META-INF"
 
-    # Import DTB image
-    mv "$TOP/arch/arm64/boot/dtb_exynos.img" "$TMP_DIR/dtb.img"
-
-    # Import ramdisk
-    mv "$TOP/tools/make/$RAMDISK" "$TMP_DIR/$RAMDISK"
-
-    # Import AnyKernel3
-    cp -r "$TOP/tools/make/package/"* "$TMP_DIR"
-
-    # Nuke product from fstab when building AOSP
-    if [[ $BUILD_VARIANT == aosp ]]; then
-        script_echo "I: Remove product from fstab for use with AOSP ROMs."
-        sed -i '/product/d' "$TOP/tools/make/ramdisk/fstab.exynos9610"
-        sed -i '/product/d' "$TOP/tools/make/ramdisk/fstab.exynos9610"
-    fi
-
-    # Generate manifest
-    {
-        echo "ro.mint.build.date=$BUILD_DATE"
-        echo "ro.mint.build.branch=local"
-        echo "ro.mint.droid.device=${BUILD_DEVICE_NAME^}"
-        echo "ro.mint.droid.variant=$MINT_VARIANT"
-
-        echo "ro.mint.droid.beta=false"
-        echo "ro.mint.build.version=$BUILD_DATE"
-
-        echo "ro.mint.droid.android=$BUILD_ANDROID_PLATFORM"
-        echo "ro.mint.droid.platform=11-$BUILD_ANDROID_PLATFORM"
-
-        # Device support
-        echo "ro.mint.device.name1=${BUILD_DEVICE_NAME}"
-        echo "ro.mint.device.name2=${BUILD_DEVICE_NAME}xx"
-        echo "ro.mint.device.name3=${BUILD_DEVICE_NAME}dd"
-        echo "ro.mint.device.name4=${BUILD_DEVICE_NAME}ser"
-        echo "ro.mint.device.name5=${BUILD_DEVICE_NAME}ltn"
-        [ "$BUILD_DEVICE_NAME" == "a50" ] && echo "ro.mint.device.name6=a505f"
-    } >> "$TMP_DIR/mint.prop"
-
-    # Create zip file
     cd "$TMP_DIR" && zip -9 -r "$OUT_DIR/$FILE_NAME" ./* 2>&1 | sed 's/^/     /'
 }
 

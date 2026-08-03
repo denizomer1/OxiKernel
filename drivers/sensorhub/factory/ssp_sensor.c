@@ -24,13 +24,7 @@
 
 #define MODEL_NAME      "CHUB_EXYNOS9610"
 
-#if defined(CONFIG_SENSORS_SSP_A50S)
-#define SSP_FIRMWARE_REVISION       	21020200
-#elif defined(CONFIG_SENSORS_SSP_M30S)
-#define SSP_FIRMWARE_REVISION       	21020200
-#else // CONFIG_SENSOR_SSP_A50
 #define SSP_FIRMWARE_REVISION       	21030800
-#endif
 
 #define FACTORY_DATA_MAX        100
 static char buffer[FACTORY_DATA_MAX];

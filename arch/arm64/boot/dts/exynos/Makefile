@@ -6,8 +6,7 @@ dtb-$(CONFIG_ARCH_EXYNOS) += \
 
 dtb-$(CONFIG_SOC_EXYNOS9610) += exynos9610.dtb
 dtb-$(CONFIG_SOC_EXYNOS9610) += \
-	exynos9610-universal9610.dtbo \
-	exynos9611-universal9611.dtbo
+	exynos9610-universal9610.dtbo
 
 # always		:= $(dtb-y) $(dtbo-y)
 subdir-y	:= $(dts-dirs)

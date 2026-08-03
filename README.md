@@ -131,8 +131,10 @@ Başka cihaz, Android sürümü, ROM varyantı veya artımlı derleme seçeneği
 
 Başarılı derlemenin dosyaları `out/` dizinine yazılır:
 
-- `Mint-*.zip` veya `MintBeta-*.zip`: recovery üzerinden kurulabilir paket
-- `boot.img`: doğrudan boot imajı
+- `MintFreshED-*.zip`: Galaxy A50 recovery üzerinden kurulabilir minimal paket
+- `boot.img`: Galaxy A50 için doğrudan boot imajı
+
+ZIP yalnız `boot.img`, `dtb.img` ve Galaxy A50'ye özel minimal recovery kurucusunu içerir. AnyKernel, BusyBox, Magisk, KernelSU veya root yardımcı araçları içermez.
 
 Derlemeyi sıfırdan tekrarlamak için normal komutu yeniden çalıştırın. Betik her zaman `make clean` ve `make mrproper` uygular.
 
