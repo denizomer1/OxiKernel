@@ -446,7 +446,6 @@
 		};
 	};
 };
-
 &pinctrl_4 {
 	chg_en: chg-en {
 		samsung,pins = "gpg2-3";

@@ -405,14 +405,7 @@ static void remove_flag(char *cmd, const char *flag)
  */
 static void __init setup_command_line(char *command_line)
 {
-	// magisk removes skip_initramfs from kernel
-	// so skip_initramfs won't be removed from cmdline
-	// and magisk will use SARInit which renders
-	// the device unbootable so we have to 'hide'
-	// skip_initramfs string
-	char skip_initramfs[] = "skip!initramfs";
-	skip_initramfs[4] = '_';
-	remove_flag(command_line, skip_initramfs);
+	remove_flag(command_line, "skip_initramfs");
 
 	saved_command_line =
 		memblock_virt_alloc(strlen(boot_command_line) + 1, 0);

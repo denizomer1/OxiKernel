@@ -4,13 +4,6 @@ config MINT
 	 This is a Mint kernel build. Enabled by default
 	 for Mint Kernel trees.
 
-config MINT_SESL
-	depends on MINT
-	bool "One UI support"
-	default n
-	help
-		Build Mint Kernel components for One UI support
-
 config MINT_PLATFORM_VERSION
 	depends on MINT
 	int "Android platform version"

@@ -1,7 +1,7 @@
 
 # MintFreshed Kernel
 
-Mint, Samsung Galaxy A50 için geliştirilen, Exynos 9610 tabanlı ve AOSP ROM'ları hedefleyen özel bir Android çekirdeğidir. Samsung'un yayımladığı çekirdek kaynaklarını temel alır; günlük kullanımda akıcılık, düşük gecikme ve verimli kaynak kullanımı hedefleyen ek iyileştirmeler içerir.
+MintFreshED, yalnız Samsung Galaxy A50 için tutulan Exynos 9610 tabanlı Android çekirdeğidir. Android 12 AOSP, GSI ve LineageOS tabanlı sistemleri hedefler. One UI, başka cihazlar ve yerleşik root çözümleri desteklenmez.
 
 > [!WARNING]
 > Özel çekirdek yüklemek cihazın açılmamasına, veri kaybına veya güvenlik özelliklerinin kalıcı olarak devre dışı kalmasına neden olabilir. İşleme başlamadan önce verilerinizi yedekleyin. Tüm sorumluluk kullanıcıya aittir.
@@ -30,6 +30,8 @@ Başlıca özellikler:
 - AOSP tabanlı ROM'lar için özelleştirilmiş yapılandırma
 - Linux upstream ve farklı Android cihazlarından taşınan düzeltmeler
 
+Kaynak ağacının device-tree bölümü yalnız A50 SWA donanım revizyonlarını (`00`, `01`, `02`, `03`, `04`, `06`) ve bunların Exynos 9610 bağımlılıklarını içerir. A50s, A80, M30s, Exynos 9611 ve diğer ARM64 kartların DTS dosyaları kaldırılmıştır. Donanımın çalışması için gereken Samsung ekran, kamera, modem, ses, sensör ve güç sürücüleri korunmuştur.
+
 ## Hazır paketi kurma
 
 ### Gereksinimler
@@ -49,7 +51,7 @@ Samsung Knox sayacı, bootloader kilidi açıldığında kalıcı olarak tetikle
 
 ### Kurulum
 
-1. Uygun ZIP paketini [GitHub Releases](https://github.com/FreshROMs/android_kernel_samsung_exynos9610_mint/releases) sayfasından indirin.
+1. `out/` dizinindeki uygun MintFreshED ZIP paketini kullanın.
 2. Paketi telefonun dahili depolamasına veya SD karta kopyalayın.
 3. Recovery moduna yeniden başlatın.
 4. Mümkünse mevcut `boot` bölümünün yedeğini alın.
@@ -134,9 +136,19 @@ Başarılı derlemenin dosyaları `out/` dizinine yazılır:
 - `MintFreshED-*.zip`: Galaxy A50 recovery üzerinden kurulabilir minimal paket
 - `boot.img`: Galaxy A50 için doğrudan boot imajı
 
-ZIP yalnız `boot.img`, `dtb.img` ve Galaxy A50'ye özel minimal recovery kurucusunu içerir. AnyKernel, BusyBox, Magisk, KernelSU veya root yardımcı araçları içermez.
+ZIP yalnız `boot.img`, `dtb.img` ve Galaxy A50'ye özel minimal recovery kurucusunu içerir. AnyKernel, BusyBox, Magisk, KernelSU veya root yardımcı aracı içermez. Kurucu yalnız cihaz kimliğini denetler ve iki imajı ilgili bölümlere yazar.
 
-Derlemeyi sıfırdan tekrarlamak için normal komutu yeniden çalıştırın. Betik her zaman `make clean` ve `make mrproper` uygular.
+Derlemeyi sıfırdan tekrarlamak için normal komutu yeniden çalıştırın. Betik her zaman `make mrproper` ile temiz yapılandırma oluşturur.
+
+### LineageOS/GSI geliştirmesinde kullanım
+
+Bu ağaç A50 device tree içinden standart ARM64 kernel kaynağı olarak kullanılabilir. Derleme yapılandırması üç parçadan oluşur:
+
+- `arch/arm64/configs/exynos9610-a50_core_defconfig`
+- `arch/arm64/configs/exynos9610-a50_default_defconfig`
+- `kernel/configs/mint_*12.config`
+
+ROM derlemesi çekirdeği kendi build sistemiyle paketleyecekse `build.sh` içindeki aynı config birleştirme sırasını kullanmalıdır. `build.sh` ise bağımsız test ve recovery ZIP üretimi için referans uygulamadır. Android 13+, One UI ve A50 dışı cihazlar bu ağacın hedefi değildir.
 
 ## Sorun giderme
 
@@ -162,7 +174,7 @@ Bir hata bildirirken aşağıdakileri ekleyin:
 
 - Tam cihaz modeli (ör. `SM-A505F`)
 - Mint sürümü ve kullanılan paket adı
-- Android ve ROM/One UI sürümü
+- Android ve ROM sürümü
 - Baseband sürümü
 - Sorunu yeniden oluşturma adımları
 - İlgili `logcat`, `dmesg` ve `kmsg` kayıtları

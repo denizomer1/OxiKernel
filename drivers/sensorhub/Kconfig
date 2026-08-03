@@ -25,18 +25,6 @@ config SENSORS_SSP_A50
 	help
 	  If you want to use sensor hub for a50 project, it should be set.
 
-config SENSORS_SSP_M30S
-	tristate "Sensors ssp m30s"
-	default n
-	help
-	  If you want to use sensor hub for m30s project, it should be set.
-
-config SENSORS_SSP_A51
-	tristate "Sensors ssp a51"
-	default n
-	help
-	  If you want to use sensor hub for a51 project, it should be set.
-
 config SENSORS_SSP_GYROFILE_FOR_MAG
 	tristate "use gyro cal file for mag cal"
 	default n	
@@ -44,15 +32,6 @@ config SENSORS_SSP_GYROFILE_FOR_MAG
 	  If you want to use gyro cal file for magnetic sensor, it should be set.
 
 config SENSORS_A96T3X6
-	depends on I2C
-	tristate "A96T3X6 touchkey"
-	default n
-	help
-	  If you say yes here if you use A96T3X6 for grip.
-	  This option enables grip sensors using
-	  Above A96T3X6 device driver for grip.
-
-config SENSORS_A96T3X6_M30S
 	depends on I2C
 	tristate "A96T3X6 touchkey"
 	default n
