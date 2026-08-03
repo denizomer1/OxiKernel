@@ -212,3 +212,5 @@ lib/lib.a.symversions
 arch/arm64/lib/lib.a.symversions
 arch/arm/vdso/vdsomunge
 kernel/config_data.h
+vendor-patch/source/
+vendor-patch/output/
