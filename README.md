@@ -1,7 +1,7 @@
 
 # MintFreshed Kernel
 
-Mint, Samsung Galaxy A50 için geliştirilen, Exynos 9610 tabanlı ve One UI öncelikli özel bir Android çekirdeğidir. Samsung'un yayımladığı çekirdek kaynaklarını temel alır; günlük kullanımda akıcılık, düşük gecikme ve verimli kaynak kullanımı hedefleyen ek iyileştirmeler içerir.
+Mint, Samsung Galaxy A50 için geliştirilen, Exynos 9610 tabanlı ve AOSP ROM'ları hedefleyen özel bir Android çekirdeğidir. Samsung'un yayımladığı çekirdek kaynaklarını temel alır; günlük kullanımda akıcılık, düşük gecikme ve verimli kaynak kullanımı hedefleyen ek iyileştirmeler içerir.
 
 > [!WARNING]
 > Özel çekirdek yüklemek cihazın açılmamasına, veri kaybına veya güvenlik özelliklerinin kalıcı olarak devre dışı kalmasına neden olabilir. İşleme başlamadan önce verilerinizi yedekleyin. Tüm sorumluluk kullanıcıya aittir.
@@ -13,8 +13,8 @@ Mint, Samsung Galaxy A50 için geliştirilen, Exynos 9610 tabanlı ve One UI ön
 | Desteklenen cihaz | Samsung Galaxy A50 (`a50`, SM-A505 ailesi) |
 | SoC | Samsung Exynos 9610 |
 | Çekirdek tabanı | Linux 4.14.194 |
-| Desteklenen Android sürümleri | Android 11 ve 12 |
-| ROM türleri | One UI ve AOSP tabanlı ROM'lar |
+| Desteklenen Android sürümü | Android 12 |
+| ROM türleri | AOSP tabanlı ROM'lar |
 | Mimariler | ARM64 çekirdek, ARM32 uyumluluk katmanı |
 | Derleyici | Proton Clang 13 |
 | Lisans | Çekirdek: GPL-2.0, derleme betiği: GPL-3.0 |
@@ -27,8 +27,7 @@ Başlıca özellikler:
 - Ek I/O zamanlayıcıları; varsayılan olarak `anxiety`
 - ZRAM, RAM Plus ve süreç başına takas desteği
 - WireGuard desteği
-- One UI ve AOSP için ayrı yapılandırmalar
-- İsteğe bağlı KernelSU entegrasyonu
+- AOSP tabanlı ROM'lar için özelleştirilmiş yapılandırma
 - Linux upstream ve farklı Android cihazlarından taşınan düzeltmeler
 
 ## Hazır paketi kurma
@@ -44,10 +43,8 @@ Samsung Knox sayacı, bootloader kilidi açıldığında kalıcı olarak tetikle
 
 ### Doğru paketi seçme
 
-- Samsung stok yazılımı veya One UI tabanlı ROM kullanıyorsanız `OneUI` paketini seçin.
-- LineageOS ve diğer AOSP tabanlı ROM'larda `AOSP` paketini seçin.
-- Android sürümü paket adındaki sürümle aynı olmalıdır (`A11` veya `A12`).
-- Root istemiyorsanız standart paketi, KernelSU kullanacaksanız adında `KSU` bulunan paketi seçin.
+- MintFreshED yalnız LineageOS ve diğer AOSP tabanlı ROM'lar için derlenir. Samsung stok yazılımı ve One UI tabanlı ROM'lar desteklenmez.
+- Android 12 tabanlı bir ROM kullanılmalıdır.
 - Normal kullanımda `Enforcing` paket önerilir. `Permissive` yalnız hata ayıklama içindir ve güvenli değildir.
 
 ### Kurulum
@@ -98,67 +95,37 @@ sudo pacman -S --needed \
 
 ### 2. Kaynak kodu alın
 
-KernelSU ile derleme yapabilmek için alt modülleri de indirin:
+Kaynak kodu indirin:
 
 ```bash
-git clone --recurse-submodules \
-  https://github.com/FreshROMs/android_kernel_samsung_exynos9610_mint.git
+git clone https://github.com/FreshROMs/android_kernel_samsung_exynos9610_mint.git
 cd android_kernel_samsung_exynos9610_mint
-```
-
-Depoyu daha önce klonladıysanız:
-
-```bash
-git submodule update --init --recursive
 ```
 
 ### 3. Derlemeyi başlatın
 
 `build.sh`, gerekli Proton Clang araç zincirini ilk çalıştırmada otomatik olarak `toolchain/` dizinine indirir, yapılandırmaları birleştirir ve paketi hazırlar.
 
-One UI 4 / Android 12 için önerilen standart derleme:
+AOSP 12 SELinux enforcing derlemesi için:
 
 ```bash
-./build.sh --device a50 --variant oneui --android 12
+./build.sh --enforcing
 ```
 
-AOSP 12 için:
+AOSP 12 SELinux permissive derlemesi için:
 
 ```bash
-./build.sh --device a50 --variant aosp --android 12
+./build.sh --permissive
 ```
-
-KernelSU eklemek için:
-
-```bash
-./build.sh --device a50 --variant oneui --android 12 --kernelsu
-```
-
-Recovery entegrasyonunda kullanılacak yalnız çekirdek imajını üretmek için:
-
-```bash
-./build.sh --device a50 --variant recovery --android 12
-```
-
-Android 11 hedefliyorsanız komutlardaki `--android 12` bölümünü `--android 11` olarak değiştirin.
 
 ### Derleme seçenekleri
 
 ```text
--d, --device <cihaz>     Hedef cihaz (zorunlu; şu anda yalnız a50)
--v, --variant <tür>      oneui, aosp veya recovery (zorunlu)
--a, --android <sürüm>    Android sürümü (11 veya 12; varsayılan: 11)
--k, --kernelsu           KernelSU desteğini etkinleştirir
--n, --no-clean           Temizleme yapmadan artımlı derler
--p, --permissive         SELinux permissive derlemesi üretir (önerilmez)
--h, --help               Yardım ekranını gösterir
+--enforcing     SELinux enforcing AOSP 12 çekirdeği üretir
+--permissive    SELinux permissive AOSP 12 çekirdeği üretir (önerilmez)
 ```
 
-Tüm seçenekleri doğrudan görmek için:
-
-```bash
-./build.sh --help
-```
+Başka cihaz, Android sürümü, ROM varyantı veya artımlı derleme seçeneği yoktur. Betik her çalıştırmada temiz derleme yapar.
 
 ### Derleme çıktıları
 
@@ -166,9 +133,8 @@ Başarılı derlemenin dosyaları `out/` dizinine yazılır:
 
 - `Mint-*.zip` veya `MintBeta-*.zip`: recovery üzerinden kurulabilir paket
 - `boot.img`: doğrudan boot imajı
-- `Image`: yalnız `recovery` varyantında üretilen ham ARM64 çekirdek imajı
 
-Derlemeyi sıfırdan tekrarlamak için normal komutu yeniden çalıştırın. Betik varsayılan olarak `make clean` ve `make mrproper` uygular. Yalnız ne yaptığınızı biliyorsanız daha hızlı artımlı derleme için `--no-clean` kullanın.
+Derlemeyi sıfırdan tekrarlamak için normal komutu yeniden çalıştırın. Betik her zaman `make clean` ve `make mrproper` uygular.
 
 ## Sorun giderme
 
@@ -182,7 +148,7 @@ Proton Clang 13 eski bir kullanıcı alanı hedeflediğinden bazı yeni dağıt�
 
 ### Derleme sonunda `Image not built successfully` hatası
 
-Bu mesaj asıl hatanın özetidir. Terminal çıktısında bundan önce görünen ilk `error:` satırını inceleyin. Artımlı derleme kullandıysanız `--no-clean` seçeneğini kaldırıp yeniden deneyin.
+Bu mesaj asıl hatanın özetidir. Terminal çıktısında bundan önce görünen ilk `error:` satırını inceleyin.
 
 ### Cihaz açılmıyor
 
