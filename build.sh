@@ -104,8 +104,9 @@ BUILD_KERNEL() {
 
     case "$BUILD_PREF_COMPILER_VERSION" in
     proton)
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang --ld-path=/usr/bin/ld" HOSTCXX="clang++ --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang --ld-path=/usr/bin/ld" HOSTCXX="clang++ --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
+        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
+        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j1 drivers/net/wireless/scsc/ LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
+        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
         ;;
     clang)
         make -C "$TOP" CC="$BUILD_PREF_COMPILER" LLVM=1 "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
@@ -165,7 +166,7 @@ BUILD_IMAGE() {
 
     "$TOP/tools/make/bin/mkbootimg" \
         --kernel "$TOP/arch/arm64/boot/Image" --ramdisk "$TOP/tools/make/$RAMDISK" \
-        --cmdline "androidboot.selinux=permissive loop.max_part=7" --board "$DEVICE_KERNEL_BOARD" \
+        --cmdline "$KERNEL_CMDLINE" --board "$DEVICE_KERNEL_BOARD" \
         --base "$DEVICE_KERNEL_BASE" --pagesize "$DEVICE_KERNEL_PAGESIZE" \
         --kernel_offset "$DEVICE_KERNEL_OFFSET" --ramdisk_offset "$DEVICE_RAMDISK_OFFSET" \
         --second_offset "$DEVICE_SECOND_OFFSET" --tags_offset "$DEVICE_TAGS_OFFSET" \
@@ -247,6 +248,9 @@ case "$1" in
 	show_usage ;;
 esac
 
+KERNEL_CMDLINE="loop.max_part=7"
+$BUILD_KERNEL_PERMISSIVE && KERNEL_CMDLINE="androidboot.selinux=permissive $KERNEL_CMDLINE"
+
 # Set variables
 source "$DEVICE_DB_DIR/kernel_info.sh"
 source "$DEVICE_DB_DIR/$BUILD_DEVICE_NAME.sh"
@@ -274,6 +278,7 @@ SET_ANDROIDVERSION
 
 script_echo " "
 script_echo "I: Clean build!"
+touch "$TOP/.config"
 make CC="$BUILD_PREF_COMPILER" mrproper 2>&1 | sed 's/^/     /' || exit_script
 
 # Merge subconfigs
