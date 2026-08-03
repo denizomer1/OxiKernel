@@ -1,0 +1,125 @@
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:11.217  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:11.217  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:11.311  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:11.312  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:11.681  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Failed to parse bpf iface stats]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:11.694  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:12.481  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Failed to parse bpf iface stats]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:12.502  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Failed to parse bpf iface stats]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:17.739  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:22.614  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:22.804  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:22.813  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:22.824  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:23.937  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:23.938  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:23.939  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:23.939  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:32.230  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:33.797  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:38.541  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:38.644  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:43.305  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:43.396  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:06:47.113  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:07:48.114  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:08:36.785  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:08:36.875  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:04.600  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:04.783  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:08.360  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:08.360  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:28.810  4368  4368 I auditd  : avc:  denied  { find } for pid=9566 uid=2000 name=dnsresolver scontext=u:r:shell:s0 tcontext=u:object_r:dnsresolver_service:s0 tclass=service_manager permissive=0
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:28.887  4368  4368 I auditd  : avc:  denied  { find } for pid=9566 uid=2000 name=netd scontext=u:r:shell:s0 tcontext=u:object_r:netd_service:s0 tclass=service_manager permissive=0
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.497  5995  6025 I am_wtf  : [0,5995,system_server,-1,ClatCoordinator,Cannot open cookie tag map: android.system.ErrnoException: nativeBpfFdGet failed: ENOENT (No such file or directory)]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.547  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Failed to parse bpf iface stats]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.560  6708  6708 D DSRM-0  : At Least One InternetDataNetwork Connected
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.560  6708  6708 V DPM-0   : onInternetDataNetworkConnected: defaultProfile=[DataProfile=[ApnSetting] Turk Telekom Internet, 3069, 28603, internet, , null, , null, null, 1, supl | hipri | default, IPV4V6, IPV4V6, true, 0, false, 0, 0, 0, 0, 0, null, , false, UNKNOWN, UNKNOWN, 0, -1, -1, false, 3, 3760257, false, UNEDITED, TrafficDescriptor={mDnn=internet, null}, preferred=false] previous preferredDataProfile=null internetNetworks={[DataNetwork: DN-100-C, internet, state=ConnectedState]}
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.570  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Failed to parse bpf iface stats]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.592  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Failed to parse bpf iface stats]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.623  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Failed to parse bpf iface stats]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:09:57.708  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:10:03.719  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:10:03.724  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:10:05.988  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:10:07.621  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:10:09.742  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:25.878  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:26.259  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:27.728  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:30.715  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:39.550  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:39.552  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:45.481  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:11:53.720  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:01.609     0     0 I [3:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10325
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:16.655     0     0 I [3:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10627
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:31.700     0     0 I [2:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10631
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:33.595  4368  4368 I auditd  : avc:  denied  { find } for pid=10645 uid=2000 name=dnsresolver scontext=u:r:shell:s0 tcontext=u:object_r:dnsresolver_service:s0 tclass=service_manager permissive=0
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:33.598     0     0 E [3: servicemanager: 4368] SELinux: avc:  denied  { find } for pid=10645 uid=2000 name=dnsresolver scontext=u:r:shell:s0 tcontext=u:object_r:dnsresolver_service:s0 tclass=service_manager permissive=0
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:33.750  4368  4368 I auditd  : avc:  denied  { find } for pid=10645 uid=2000 name=netd scontext=u:r:shell:s0 tcontext=u:object_r:netd_service:s0 tclass=service_manager permissive=0
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:33.754     0     0 E [5: servicemanager: 4368] SELinux: avc:  denied  { find } for pid=10645 uid=2000 name=netd scontext=u:r:shell:s0 tcontext=u:object_r:netd_service:s0 tclass=service_manager permissive=0
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:46.118  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:46.729     0     0 I [3:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10634
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:12:48.463  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:13:01.773     0     0 I [3:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10823
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:13:16.805     0     0 I [3:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10882
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:13:26.654     0     0 I [1:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10974
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:13:31.844     0     0 I [3:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10978
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:13:46.884     0     0 I [2:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10982
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:01.933     0     0 I [3:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10985
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:07.991  5995  6565 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:10.151  5995  8519 I Freezer : Cannot open freezer path "/sys/fs/cgroup/system/uid_1000/pid_5995/cgroup.freeze": No such file or directory
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:10.160  5995  6565 I Freezer : Cannot open freezer path "/sys/fs/cgroup/system/uid_1000/pid_5995/cgroup.freeze": No such file or directory
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:11.125  5995  6565 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:12.085  5995  6027 I libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10537
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:16.976     0     0 I [0:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10987
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:20.330  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:20.331  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:20.348 11047 11047 D nativeloader: InitLlndkLibrariesProduct: libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libRS.so:libandroid_net.so:libapexsupport.so:libavf.so:libbinder_ndk.so:libc.so:libcgrouprc.so:libclang_rt.asan-aarch64-android.so:libclang_rt.asan-arm-android.so:libclang_rt.hwasan-aarch64-android.so:libcom.android.tethering.connectivity_native.so:libdl.so:libft2.so:liblog.so:libm.so:libmediandk.so:libnativewindow.so:libneuralnetworks.so:libselinux.so:libsync.so:libvendorsupport.so:libvndksupport.so:libvulkan.so
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:20.894  5995  9779 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:21.653     0     0 I [0:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_10993
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:22.331  5995  8854 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:23.014  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:23.015  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:23.474  5995  6027 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10165/pid_11047
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:25.659  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:25.661  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:26.010  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:26.011  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:26.262  5995  6027 I libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1002/pid_11209
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:26.266     0     0 I [7:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1002/pid_5696
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:31.188  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:31.189  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:31.204 11266 11266 D nativeloader: InitLlndkLibrariesProduct: libEGL.so:libGLESv1_CM.so:libGLESv2.so:libGLESv3.so:libRS.so:libandroid_net.so:libapexsupport.so:libavf.so:libbinder_ndk.so:libc.so:libcgrouprc.so:libclang_rt.asan-aarch64-android.so:libclang_rt.asan-arm-android.so:libclang_rt.hwasan-aarch64-android.so:libcom.android.tethering.connectivity_native.so:libdl.so:libft2.so:liblog.so:libm.so:libmediandk.so:libnativewindow.so:libneuralnetworks.so:libselinux.so:libsync.so:libvendorsupport.so:libvndksupport.so:libvulkan.so
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:31.321  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:31.321  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:31.717  5995  7158 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:32.014     0     0 I [5:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_11007
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:33.350  5995  9779 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.033  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.033  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.034  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.035  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.134  5995  6027 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10167/pid_11266
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.559  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.560  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.560  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.560  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.561  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.561  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.772  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:34.772  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:35.418  5995  8516 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:35.969  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:35.972  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:35.973  5995  6404 E NetworkStats: Fail to set UidCounterSet: Null bpf map
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:35.974  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:35.974  5995  6025 I am_wtf  : [0,5995,system_server,-1,NetworkStats,Fail to set UidCounterSet: Null bpf map]
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:36.120  5995  6027 I libprocessgroup: Removed cgroup /sys/fs/cgroup/apps/uid_10148/pid_7914
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:36.124  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:36.124  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:36.124  5995  6404 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:47.051     0     0 I [2:           init:    1] libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_11313
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:48.952  5995  9749 E BpfNetMapsUtils: Unable to get firewall chain status
+exynos-gsi-diagnostics-20260804-021452/logcat.txt:08-04 02:14:49.696  5995  6027 I libprocessgroup: Removed cgroup /sys/fs/cgroup/system/uid_1000/pid_11351

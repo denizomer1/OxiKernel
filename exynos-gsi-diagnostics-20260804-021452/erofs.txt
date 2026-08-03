@@ -1,0 +1,5 @@
+command: echo "== mounts =="; mount | grep -E "erofs| /system | /system_ext | /product "; echo "== config =="; zcat /proc/config.gz 2>/dev/null | grep -E "CONFIG_EROFS|CONFIG_LZ4"
+
+== mounts ==
+== config ==
+CONFIG_LZ4_DECOMPRESS=y

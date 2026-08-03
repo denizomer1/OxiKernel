@@ -1,0 +1,3 @@
+command: su -c dmesg
+
+adb: no devices/emulators found

@@ -1,0 +1,23 @@
+command: for d in /sys/class/power_supply/*; do echo "== $d =="; for f in type status capacity voltage_now current_now temp charge_counter; do test -r "$d/$f" && echo "$f=$(cat "$d/$f")"; done; done
+
+== /sys/class/power_supply/ac ==
+type=Mains
+temp=437
+== /sys/class/power_supply/battery ==
+type=Battery
+status=Charging
+capacity=26
+voltage_now=3784000
+current_now=221
+temp=363
+charge_counter=973960
+== /sys/class/power_supply/otg ==
+== /sys/class/power_supply/ps ==
+type=POWER_SHARING
+status=Unknown
+== /sys/class/power_supply/sm5713-charger ==
+== /sys/class/power_supply/sm5713-fuelgauge ==
+== /sys/class/power_supply/usb ==
+type=USB
+== /sys/class/power_supply/wireless ==
+type=Wireless

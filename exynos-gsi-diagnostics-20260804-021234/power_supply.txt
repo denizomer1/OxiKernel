@@ -1,0 +1,3 @@
+command: sh -c for d in /sys/class/power_supply/*; do echo "== $d =="; for f in type status capacity voltage_now current_now temp charge_counter; do test -r "$d/$f" && echo "$f=$(cat "$d/$f")"; done; done
+
+/system/bin/sh: syntax error: unexpected 'do'

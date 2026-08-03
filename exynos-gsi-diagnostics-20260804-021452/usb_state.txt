@@ -1,0 +1,10 @@
+command: echo "== UDC =="; ls -la /sys/class/udc 2>&1; for f in /sys/class/udc/*/state; do echo "== $f =="; cat "$f"; done; echo "== gadget =="; find /config/usb_gadget -maxdepth 3 -type f 2>/dev/null | sort
+
+== UDC ==
+total 0
+drwxr-xr-x  2 root root 0 2026-08-04 02:04 .
+drwxr-xr-x 85 root root 0 2026-08-04 02:04 ..
+lrwxrwxrwx  1 root root 0 2026-08-04 02:04 13200000.dwc3 -> ../../devices/platform/13200000.usb/13200000.dwc3/udc/13200000.dwc3
+== /sys/class/udc/13200000.dwc3/state ==
+configured
+== gadget ==

@@ -1,0 +1,3 @@
+command: find /sys/class/sec /sys/bus/i2c/devices -maxdepth 4 \( -iname "*tsp*" -o -iname "*touch*" -o -iname "*sec_ts*" \) -print 2>/dev/null | sort
+
+/sys/class/sec/tsp
