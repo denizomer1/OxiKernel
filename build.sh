@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # shellcheck disable=SC1090
 
+set -o pipefail
+
 # Directories
 TOP="$(pwd)"
 TOOLCHAIN="$TOP/toolchain"
@@ -55,10 +57,6 @@ VERIFY_TOOLCHAIN() {
 
     if [ -d "$TOOLCHAIN" ]; then
         script_echo "I: Toolchain found at repository root"
-        cd "$TOOLCHAIN" || exit
-        git pull
-        cd "$TOP" || exit
-
     else
         script_echo "I: Toolchain not found at repository root"
         script_echo "   Downloading recommended toolchain at \"$TOOLCHAIN\"..."
@@ -106,8 +104,8 @@ BUILD_KERNEL() {
 
     case "$BUILD_PREF_COMPILER_VERSION" in
     proton)
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC=clang HOSTCXX=clang++ AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC=clang HOSTCXX=clang++ AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
+        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang --ld-path=/usr/bin/ld" HOSTCXX="clang++ --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
+        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang --ld-path=/usr/bin/ld" HOSTCXX="clang++ --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
         ;;
     clang)
         make -C "$TOP" CC="$BUILD_PREF_COMPILER" LLVM=1 "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
@@ -276,8 +274,7 @@ SET_ANDROIDVERSION
 
 script_echo " "
 script_echo "I: Clean build!"
-make CC="$BUILD_PREF_COMPILER" clean 2>&1 | sed 's/^/     /'
-make CC="$BUILD_PREF_COMPILER" mrproper 2>&1 | sed 's/^/     /'
+make CC="$BUILD_PREF_COMPILER" mrproper 2>&1 | sed 's/^/     /' || exit_script
 
 # Merge subconfigs
 merge_config "partial-deknox-$BUILD_ANDROID_PLATFORM"
