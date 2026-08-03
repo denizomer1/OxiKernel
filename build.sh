@@ -1,37 +1,6 @@
 #!/usr/bin/env bash
-# =========================================
-#         _____              _
-#        |  ___| __ ___  ___| |__
-#        | |_ | '__/ _ \/ __| '_ \
-#        |  _|| | |  __/\__ \ | | |
-#        |_|  |_|  \___||___/_| |_|
-#
-# =========================================
-#
-#  Minty - The kernel build script for Mint
-#  The Fresh Project
-#  Copyright (C) 2019-2021 TenSeventy7
-#                2024-2025 PeterKnecht93
-#
-#  This program is free software: you can redistribute it and/or modify
-#  it under the terms of the GNU General Public License as published by
-#  the Free Software Foundation, either version 3 of the License, or
-#  (at your option) any later version.
-#
-#  This program is distributed in the hope that it will be useful,
-#  but WITHOUT ANY WARRANTY; without even the implied warranty of
-#  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#  GNU General Public License for more details.
-#
-#  You should have received a copy of the GNU General Public License
-#  along with this program.  If not, see <https://www.gnu.org/licenses/>.
-#
-#  =========================
-#
 # shellcheck disable=SC1090
-#
 
-# [
 # Directories
 TOP="$(pwd)"
 TOOLCHAIN="$TOP/toolchain"
@@ -56,21 +25,17 @@ PATCHLEVEL=$(grep -m 1 PATCHLEVEL "$TOP/Makefile" | sed 's/^.*= //g')
 SUBLEVEL=$(grep -m 1   SUBLEVEL "$TOP/Makefile"   | sed 's/^.*= //g')
 
 BUILD_DATE="$(date +%s)"
-BUILD_KERNEL_BRANCH="${GITHUB_REF##*/}"
-[[ -z $BUILD_KERNEL_BRANCH ]] && BUILD_KERNEL_BRANCH="user"
-[[ $BUILD_KERNEL_BRANCH == *"android-"* ]] && BUILD_KERNEL_BRANCH="mainline"
 
 # Fixed build target
 BUILD_DEVICE_NAME="a50"
 BUILD_ANDROID_PLATFORM=12
 BUILD_VARIANT="aosp"
 MINT_VARIANT="AOSP"
-BUILD_KERNEL_CI="${GITHUB_ACTIONS:-false}"
 BUILD_KERNEL_PERMISSIVE=false
 
 # Script commands
 script_echo() { echo "  $1"; }
-exit_script() { kill -INT $$; }
+exit_script() { exit 1; }
 
 merge_config() {
 	if [[ ! -f "$SUB_CONFIG_DIR/mint_$1.config" ]]; then
@@ -86,7 +51,6 @@ merge_config() {
 
 # Script functions
 VERIFY_TOOLCHAIN() {
-    sleep 2
     script_echo " "
 
     if [ -d "$TOOLCHAIN" ]; then
@@ -95,13 +59,6 @@ VERIFY_TOOLCHAIN() {
         git pull
         cd "$TOP" || exit
 
-        if $BUILD_KERNEL_CI; then
-            if [[ $BUILD_PREF_COMPILER_VERSION == proton ]]; then
-                sudo mkdir -p '/root/build/install/aarch64-linux-gnu'
-                sudo cp -r "$TOOLCHAIN/lib" '/root/build/install/aarch64-linux-gnu'
-                sudo chown -R "$(whoami)" '/root'
-            fi
-        fi
     else
         script_echo "I: Toolchain not found at repository root"
         script_echo "   Downloading recommended toolchain at \"$TOOLCHAIN\"..."
@@ -132,43 +89,19 @@ SET_ANDROIDVERSION() {
     echo "CONFIG_MINT_PLATFORM_VERSION=$BUILD_ANDROID_PLATFORM" >> "$BUILD_CONFIG_DIR/$BUILD_DEVICE_TMP_CONFIG"
 }
 SET_LOCALVERSION() {
-    local build_version="${KERNEL_BUILD_VERSION:-$BUILD_DATE}"
-
-    case "$BUILD_KERNEL_BRANCH" in
-    mainline) export LOCALVERSION="-MintFreshED-$build_version" ;;
-    user)     export LOCALVERSION="-MintFreshED-user-$BUILD_DATE" ;;
-    *)        export LOCALVERSION="-MintFreshED-Beta-$GITHUB_RUN_NUMBER"
-    esac
+    export LOCALVERSION="-MintFreshED-$BUILD_DATE"
 }
 SET_ZIPNAME() {
-    local MINT_TYPE MINT_SELINUX
-    MINT_VERSION="$BUILD_DATE"
-    MINT_TYPE="UB"
+    local MINT_SELINUX
     MINT_SELINUX="Enforcing"
-
-    if $BUILD_KERNEL_CI; then
-        if [[ $BUILD_KERNEL_BRANCH == mainline ]]; then
-            MINT_VERSION="$KERNEL_BUILD_VERSION"
-        else
-            MINT_VERSION="$GITHUB_RUN_NUMBER"
-        fi
-        MINT_TYPE="CI"
-    fi
-
     $BUILD_KERNEL_PERMISSIVE && MINT_SELINUX="Permissive"
-
-    if [[ $BUILD_KERNEL_BRANCH == mainline ]]; then
-        FILE_NAME="Mint-${MINT_VERSION}.A${BUILD_ANDROID_PLATFORM}.${MINT_VARIANT}_${BUILD_DEVICE_NAME^}.zip"
-    else
-        FILE_NAME="MintBeta-${MINT_VERSION}.A${BUILD_ANDROID_PLATFORM}.${MINT_VARIANT}-${MINT_SELINUX}_${BUILD_DEVICE_NAME^}.${MINT_TYPE}.zip"
-    fi
+    FILE_NAME="MintFreshED-${BUILD_DATE}.A12.AOSP-${MINT_SELINUX}_A50.zip"
 }
 
 BUILD_KERNEL() {
     local JOBS
     JOBS="$(nproc --all)"
 
-    sleep 3
     script_echo " "
 
     case "$BUILD_PREF_COMPILER_VERSION" in
@@ -189,7 +122,6 @@ BUILD_KERNEL() {
     if [ ! -f "$TOP/arch/arm64/boot/Image" ]; then
         script_echo "E: Image not built successfully!"
         script_echo "   Errors can be found above."
-        sleep 3
         exit_script
     fi
 }
@@ -221,7 +153,6 @@ BUILD_RAMDISK() {
         script_echo " "
 		script_echo "E: Ramdisk not built successfully!"
 		script_echo "   Errors can be found above."
-		sleep 3
 		exit_script
     fi
 }
@@ -248,7 +179,6 @@ BUILD_IMAGE() {
 		script_echo " "
 		script_echo "E: Kernel image not built successfully!"
 		script_echo "   Errors can be found above."
-		sleep 3
 		exit_script
 	fi
 }
@@ -278,16 +208,12 @@ BUILD_PACKAGE() {
     # Generate manifest
     {
         echo "ro.mint.build.date=$BUILD_DATE"
-        echo "ro.mint.build.branch=$BUILD_KERNEL_BRANCH"
+        echo "ro.mint.build.branch=local"
         echo "ro.mint.droid.device=${BUILD_DEVICE_NAME^}"
         echo "ro.mint.droid.variant=$MINT_VARIANT"
 
-        if [[ $BUILD_KERNEL_BRANCH == mainline ]]; then
-            echo "ro.mint.droid.beta=false"
-        else
-            echo "ro.mint.droid.beta=true"
-        fi
-        echo "ro.mint.build.version=$MINT_VERSION"
+        echo "ro.mint.droid.beta=false"
+        echo "ro.mint.build.version=$BUILD_DATE"
 
         echo "ro.mint.droid.android=$BUILD_ANDROID_PLATFORM"
         echo "ro.mint.droid.platform=11-$BUILD_ANDROID_PLATFORM"
@@ -312,25 +238,6 @@ show_usage() {
 	script_echo "--permissive    Build AOSP 12 with SELinux permissive."
 	exit 1
 }
-# ]
-
-script_echo " "
-script_echo "==============================================="
-script_echo "                       _       _               "
-script_echo "                 /\/\ (_)_ __ | |_             "
-script_echo "                /    \| | '_ \| __|            "
-script_echo "               / /\/\ \ | | | | |_             "
-script_echo "               \/    \/_|_| |_|\__|            "
-script_echo "                                               "
-script_echo "==============================================="
-script_echo "           Minty - Kernel Build Script         "
-script_echo "            Part of The Fresh Project          "
-script_echo "       by TenSeventy7 - Licensed in GPLv3      "
-script_echo "                                               "
-script_echo "       Originally built for Project ShadowX    "
-script_echo "==============================================="
-script_echo " "
-
 # Process the only two supported build modes.
 [[ $# -eq 1 ]] || show_usage
 case "$1" in
@@ -367,14 +274,6 @@ VERIFY_TOOLCHAIN
 VERIFY_DEFCONFIG
 SET_ANDROIDVERSION
 
-if $BUILD_KERNEL_CI; then
-	export KBUILD_BUILD_USER="Clembot"
-	export KBUILD_BUILD_HOST="Lumiose-CI"
-
-	script_echo " "
-	script_echo "I: Beep boop! CI build!"
-fi
-
 script_echo " "
 script_echo "I: Clean build!"
 make CC="$BUILD_PREF_COMPILER" clean 2>&1 | sed 's/^/     /'
@@ -404,11 +303,8 @@ BUILD_TIME=$((TIME_NOW-BUILD_DATE))
 BUILD_TIME_STR=$(printf '%02dh:%02dm:%02ds\n' $((BUILD_TIME/3600)) $((BUILD_TIME%3600/60)) $((BUILD_TIME%60)))
 
 script_echo " "
-script_echo "I: Yay! Kernel build is done!"
-script_echo "   Kernel build took ${BUILD_TIME_STR}"
-script_echo "   File can be found at:"
-script_echo "   \"$OUT_DIR/$FILE_NAME\""
+script_echo "I: Build completed in ${BUILD_TIME_STR}"
+script_echo "   Output: $OUT_DIR/$FILE_NAME"
 rm -f "$BUILD_CONFIG_DIR/$BUILD_DEVICE_TMP_CONFIG"
-sleep 5
 
 exit 0
