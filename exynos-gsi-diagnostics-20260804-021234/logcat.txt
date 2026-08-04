@@ -1,3 +1,0 @@
-command: logcat -b all -d -v threadtime
-
-adb: no devices/emulators found

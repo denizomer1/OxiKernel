@@ -1,3 +1,0 @@
-command: su -c dmesg
-
-/system/bin/sh: su: inaccessible or not found
