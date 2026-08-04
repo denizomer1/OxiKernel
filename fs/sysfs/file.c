@@ -408,6 +408,38 @@ int sysfs_chmod_file(struct kobject *kobj, const struct attribute *attr,
 EXPORT_SYMBOL_GPL(sysfs_chmod_file);
 
 /**
+ * sysfs_file_change_owner - change the owner of a sysfs attribute
+ * @kobj: object the attribute belongs to
+ * @name: attribute name
+ * @kuid: new user ID
+ * @kgid: new group ID
+ */
+int sysfs_file_change_owner(struct kobject *kobj, const char *name,
+			    kuid_t kuid, kgid_t kgid)
+{
+	struct kernfs_node *kn;
+	struct iattr newattrs = {
+		.ia_valid = ATTR_UID | ATTR_GID,
+		.ia_uid = kuid,
+		.ia_gid = kgid,
+	};
+	int error;
+
+	if (!name || !kobj->state_in_sysfs)
+		return -EINVAL;
+
+	kn = kernfs_find_and_get(kobj->sd, name);
+	if (!kn)
+		return -ENOENT;
+
+	error = kernfs_setattr(kn, &newattrs);
+	kernfs_put(kn);
+
+	return error;
+}
+EXPORT_SYMBOL_GPL(sysfs_file_change_owner);
+
+/**
  * sysfs_break_active_protection - break "active" protection
  * @kobj: The kernel object @attr is associated with.
  * @attr: The attribute to break the "active" protection for.

@@ -2317,6 +2317,52 @@ static DEVICE_ATTR(ear_detect_enable, 0664, ear_detect_enable_show, ear_detect_e
 static DEVICE_ATTR(fod_pos, 0444, fod_position_show, NULL);
 static DEVICE_ATTR(fod_info, 0444, fod_info_show, NULL);
 
+static ssize_t enabled_show(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	struct sec_cmd_data *sec = dev_get_drvdata(dev);
+	struct mms_ts_info *info = container_of(sec, struct mms_ts_info, sec);
+
+	return scnprintf(buf, PAGE_SIZE, "%d\n", !info->input_dev->disabled);
+}
+
+static ssize_t enabled_store(struct device *dev,
+		struct device_attribute *attr, const char *buf, size_t count)
+{
+	struct sec_cmd_data *sec = dev_get_drvdata(dev);
+	struct mms_ts_info *info = container_of(sec, struct mms_ts_info, sec);
+	bool enable;
+	unsigned int command, value;
+	int ret;
+
+	/* Samsung SysInput HAL writes "<command>,<enable>" from a fixed-size
+	 * buffer.  Regular sysfs clients write a plain ASCII boolean.
+	 */
+	if (sscanf(buf, "%u,%u", &command, &value) == 2 && value <= 1) {
+		enable = value;
+	} else {
+		ret = strtobool(buf, &enable);
+		if (ret) {
+			input_err(true, &info->client->dev,
+					"%s: unsupported payload count=%zu first=0x%02x\n",
+					__func__, count, count ? buf[0] : 0);
+			return ret;
+		}
+	}
+
+	if (enable)
+		ret = input_enable_device(info->input_dev);
+	else
+		ret = input_disable_device(info->input_dev);
+	if (ret)
+		return ret;
+
+	return count;
+}
+
+static DEVICE_ATTR(enabled, S_IRUGO | S_IWUSR | S_IWGRP,
+		enabled_show, enabled_store);
+
 /**
  * Sysfs - cmd attr info
  */
@@ -2333,6 +2379,7 @@ static struct attribute *mms_cmd_attr[] = {
 	&dev_attr_ear_detect_enable.attr,
 	&dev_attr_fod_pos.attr,
 	&dev_attr_fod_info.attr,
+	&dev_attr_enabled.attr,
 	NULL,
 };
 
@@ -2368,6 +2415,15 @@ int mms_sysfs_cmd_create(struct mms_ts_info *info)
 	if (retval < 0) {
 		input_err(true, &info->client->dev,
 				"%s: Failed to create sysfs attributes\n", __func__);
+		goto exit;
+	}
+
+	retval = sysfs_file_change_owner(&info->sec.fac_dev->kobj, "enabled",
+			GLOBAL_ROOT_UID, KGIDT_INIT(1000));
+	if (retval < 0) {
+		input_err(true, &info->client->dev,
+				"%s: Failed to set enabled sysfs ownership\n",
+				__func__);
 		goto exit;
 	}
 

@@ -224,10 +224,57 @@ static ssize_t sec_ts_edge_x_position(struct device *dev,
 static DEVICE_ATTR(scrub_pos, S_IRUGO, scrub_position_show, NULL);
 static DEVICE_ATTR(edge_pos, S_IRUGO, sec_ts_edge_x_position, NULL);
 
+static ssize_t enabled_show(struct device *dev,
+		struct device_attribute *attr, char *buf)
+{
+	struct sec_cmd_data *sec = dev_get_drvdata(dev);
+	struct sec_ts_data *ts = container_of(sec, struct sec_ts_data, sec);
+
+	return scnprintf(buf, PAGE_SIZE, "%d\n", !ts->input_dev->disabled);
+}
+
+static ssize_t enabled_store(struct device *dev,
+		struct device_attribute *attr, const char *buf, size_t count)
+{
+	struct sec_cmd_data *sec = dev_get_drvdata(dev);
+	struct sec_ts_data *ts = container_of(sec, struct sec_ts_data, sec);
+	bool enable;
+	unsigned int command, value;
+	int ret;
+
+	/* Samsung SysInput HAL writes "<command>,<enable>" from a fixed-size
+	 * buffer.  Regular sysfs clients write a plain ASCII boolean.
+	 */
+	if (sscanf(buf, "%u,%u", &command, &value) == 2 && value <= 1) {
+		enable = value;
+	} else {
+		ret = strtobool(buf, &enable);
+		if (ret) {
+			input_err(true, &ts->client->dev,
+				"%s: unsupported payload count=%zu first=0x%02x\n",
+				__func__, count, count ? buf[0] : 0);
+			return ret;
+		}
+	}
+
+	if (enable)
+		ret = input_enable_device(ts->input_dev);
+	else
+		ret = input_disable_device(ts->input_dev);
+	if (ret)
+		return ret;
+
+	return count;
+}
+
+static DEVICE_ATTR(enabled, S_IRUGO | S_IWUSR | S_IWGRP,
+		enabled_show, enabled_store);
+
 
 static struct attribute *cmd_attributes[] = {
 	&dev_attr_scrub_pos.attr,
 	&dev_attr_edge_pos.attr,
+	&dev_attr_enabled.attr,
 	NULL,
 };
 
@@ -2915,6 +2962,14 @@ int sec_ts_fn_init(struct sec_ts_data *ts)
 	if (retval < 0) {
 		input_err(true, &ts->client->dev,
 			"%s: FTS Failed to create sysfs attributes\n", __func__);
+		goto exit;
+	}
+
+	retval = sysfs_file_change_owner(&ts->sec.fac_dev->kobj, "enabled",
+			GLOBAL_ROOT_UID, KGIDT_INIT(1000));
+	if (retval < 0) {
+		input_err(true, &ts->client->dev,
+			"%s: Failed to set enabled sysfs ownership\n", __func__);
 		goto exit;
 	}
 

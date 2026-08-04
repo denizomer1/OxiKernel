@@ -21,6 +21,7 @@
 #include <linux/kobject_ns.h>
 #include <linux/stat.h>
 #include <linux/atomic.h>
+#include <linux/uidgid.h>
 
 struct kobject;
 struct module;
@@ -239,6 +240,8 @@ int __must_check sysfs_create_files(struct kobject *kobj,
 				   const struct attribute **attr);
 int __must_check sysfs_chmod_file(struct kobject *kobj,
 				  const struct attribute *attr, umode_t mode);
+int sysfs_file_change_owner(struct kobject *kobj, const char *name,
+			    kuid_t kuid, kgid_t kgid);
 struct kernfs_node *sysfs_break_active_protection(struct kobject *kobj,
 						  const struct attribute *attr);
 void sysfs_unbreak_active_protection(struct kernfs_node *kn);
@@ -351,6 +354,13 @@ static inline int sysfs_create_files(struct kobject *kobj,
 
 static inline int sysfs_chmod_file(struct kobject *kobj,
 				   const struct attribute *attr, umode_t mode)
+{
+	return 0;
+}
+
+static inline int sysfs_file_change_owner(struct kobject *kobj,
+					  const char *name,
+					  kuid_t kuid, kgid_t kgid)
 {
 	return 0;
 }

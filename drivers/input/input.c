@@ -1111,7 +1111,7 @@ void input_close_device(struct input_handle *handle)
 }
 EXPORT_SYMBOL(input_close_device);
 
-static int input_enable_device(struct input_dev *dev)
+int input_enable_device(struct input_dev *dev)
 {
 	int retval;
 
@@ -1135,8 +1135,9 @@ out:
 
 	return retval;
 }
+EXPORT_SYMBOL(input_enable_device);
 
-static int input_disable_device(struct input_dev *dev)
+int input_disable_device(struct input_dev *dev)
 {
 	int retval;
 
@@ -1154,6 +1155,7 @@ static int input_disable_device(struct input_dev *dev)
 	mutex_unlock(&dev->mutex);
 	return 0;
 }
+EXPORT_SYMBOL(input_disable_device);
 
 /*
  * Simulate keyup events for all keys that are marked as pressed.
