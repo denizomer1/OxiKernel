@@ -133,12 +133,16 @@ int kbase_context_common_init(struct kbase_context *kctx)
 
 	atomic_set(&kctx->refcount, 0);
 
-	spin_lock_init(&kctx->mm_update_lock);
 	kctx->process_mm = NULL;
 	atomic_set(&kctx->nonmapped_pages, 0);
 	atomic_set(&kctx->permanent_mapped_pages, 0);
 	kctx->tgid = current->tgid;
 	kctx->pid = current->pid;
+	/* Userspace contexts retain their creator's mm for safe accounting. */
+	if (likely(kctx->filp)) {
+		mmgrab(current->mm);
+		kctx->process_mm = current->mm;
+	}
 
 	atomic_set(&kctx->used_pages, 0);
 
@@ -172,9 +176,12 @@ int kbase_context_common_init(struct kbase_context *kctx)
 	mutex_lock(&kctx->kbdev->kctx_list_lock);
 
 	err = kbase_insert_kctx_to_process(kctx);
-	if (err)
+	if (err) {
 		dev_err(kctx->kbdev->dev,
 		"(err:%d) failed to insert kctx to kbase_process\n", err);
+		if (likely(kctx->filp))
+			mmdrop(kctx->process_mm);
+	}
 
 	mutex_unlock(&kctx->kbdev->kctx_list_lock);
 
@@ -268,6 +275,8 @@ void kbase_context_common_term(struct kbase_context *kctx)
 	mutex_lock(&kctx->kbdev->kctx_list_lock);
 	kbase_remove_kctx_from_process(kctx);
 	mutex_unlock(&kctx->kbdev->kctx_list_lock);
+	if (likely(kctx->filp))
+		mmdrop(kctx->process_mm);
 
 	KBASE_KTRACE_ADD(kctx->kbdev, CORE_CTX_DESTROY, kctx, 0u);
 }
