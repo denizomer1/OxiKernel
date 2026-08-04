@@ -147,7 +147,7 @@ Bu ağaç A50 device tree içinden standart ARM64 kernel kaynağı olarak kullan
 - `arch/arm64/configs/exynos9610-a50_default_defconfig`
 - `kernel/configs/mint_*12.config`
 
-ROM derlemesi çekirdeği kendi build sistemiyle paketleyecekse `build.sh` içindeki aynı config birleştirme sırasını kullanmalıdır. `build.sh` ise bağımsız test ve recovery ZIP üretimi için referans uygulamadır. Android 13+, One UI ve A50 dışı cihazlar bu ağacın hedefi değildir.
+ROM derlemesi çekirdeği kendi build sistemiyle paketleyecekse `build.sh` içindeki aynı config birleştirme sırasını kullanmalıdır. `build.sh` ise bağımsız test ve recovery ZIP üretimi için referans uygulamadır.
 
 ## Sorun giderme
 
