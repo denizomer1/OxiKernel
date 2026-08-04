@@ -45,8 +45,7 @@ Samsung Knox sayacı, bootloader kilidi açıldığında kalıcı olarak tetikle
 
 ### Doğru paketi seçme
 
-- MintFreshED yalnız LineageOS ve diğer AOSP tabanlı ROM'lar için derlenir. Samsung stok yazılımı ve One UI tabanlı ROM'lar desteklenmez.
-- Android 12 tabanlı bir ROM kullanılmalıdır.
+- MintFreshed yalnız LineageOS ve diğer AOSP tabanlı ROM'lar için derlenir. Samsung stok yazılımı ve One UI tabanlı ROM'lar desteklenmez.
 - Normal kullanımda `Enforcing` paket önerilir. `Permissive` yalnız hata ayıklama içindir ve güvenli değildir.
 
 ### Kurulum
@@ -108,13 +107,13 @@ cd mintfresh
 
 `build.sh`, gerekli Proton Clang araç zincirini ilk çalıştırmada otomatik olarak `toolchain/` dizinine indirir, yapılandırmaları birleştirir ve paketi hazırlar.
 
-AOSP 12 SELinux enforcing derlemesi için:
+AOSP SELinux enforcing derlemesi için:
 
 ```bash
 ./build.sh --enforcing
 ```
 
-AOSP 12 SELinux permissive derlemesi için:
+AOSP SELinux permissive derlemesi için:
 
 ```bash
 ./build.sh --permissive
@@ -123,8 +122,8 @@ AOSP 12 SELinux permissive derlemesi için:
 ### Derleme seçenekleri
 
 ```text
---enforcing     SELinux enforcing AOSP 12 çekirdeği üretir
---permissive    SELinux permissive AOSP 12 çekirdeği üretir (önerilmez)
+--enforcing     SELinux enforcing AOSP çekirdeği üretir
+--permissive    SELinux permissive AOSP çekirdeği üretir (önerilmez)
 ```
 
 Başka cihaz, Android sürümü, ROM varyantı veya artımlı derleme seçeneği yoktur. Betik her çalıştırmada temiz derleme yapar.
