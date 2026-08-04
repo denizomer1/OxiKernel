@@ -1,7 +1,7 @@
 
 # MintFreshed Kernel
 
-MintFreshED, yalnız Samsung Galaxy A50 için tutulan Exynos 9610 tabanlı Android çekirdeğidir. Android 12 AOSP, GSI ve LineageOS tabanlı sistemleri hedefler. One UI, başka cihazlar ve yerleşik root çözümleri desteklenmez.
+MintFreshed, yalnız Samsung Galaxy A50 için tutulan Exynos 9610 tabanlı Android çekirdeğidir. Android 12 AOSP, GSI ve LineageOS tabanlı sistemleri hedefler. One UI, başka cihazlar ve yerleşik root çözümleri desteklenmez.
 
 > [!WARNING]
 > Özel çekirdek yüklemek cihazın açılmamasına, veri kaybına veya güvenlik özelliklerinin kalıcı olarak devre dışı kalmasına neden olabilir. İşleme başlamadan önce verilerinizi yedekleyin. Tüm sorumluluk kullanıcıya aittir.
@@ -100,8 +100,8 @@ sudo pacman -S --needed \
 Kaynak kodu indirin:
 
 ```bash
-git clone https://github.com/FreshROMs/android_kernel_samsung_exynos9610_mint.git
-cd android_kernel_samsung_exynos9610_mint
+git clone https://github.com/denizomer1/mintfresh.git
+cd mintfresh
 ```
 
 ### 3. Derlemeyi başlatın
@@ -179,24 +179,4 @@ Bir hata bildirirken aşağıdakileri ekleyin:
 - Sorunu yeniden oluşturma adımları
 - İlgili `logcat`, `dmesg` ve `kmsg` kayıtları
 
-Hataları [GitHub Issues](https://github.com/FreshROMs/android_kernel_samsung_exynos9610_mint/issues) üzerinden bildirebilirsiniz.
-
-## Kaynaklar ve teşekkürler
-
-Mint, aşağıdaki projelerden ve geliştiricilerden alınan çalışmaları içerir. Yazarlık bilgileri mümkün olduğunca commit geçmişinde korunmuştur.
-
-- [Cruel Kernel](https://github.com/CruelKernel/samsung-exynos9820/) — evdenis
-- [GaltsGulch](https://github.com/RealJohnGalt/GaltsGulch-sm8150) — RealJohnGalt
-- [DragonHeart Kernel](https://github.com/cyberknight777/dragonheart_kernel_oneplus_sm8150) — cyberknight777
-- [Sultan Kernel](https://github.com/kerneltoast/android_kernel_google_floral) — kerneltoast
-- [ThunderStorms Kernel](https://github.com/ThunderStorms21th/Galaxy-S10) — ThunderStorms21th
-- [Cosmic Fresh](https://github.com/Dark-Matter7232/CosmicFresh-Hanoip) — Dark-Matter7232
-- [Motorola Exynos kernel sources](https://github.com/MotorolaMobilityLLC/kernel-slsi)
-- [Quantum Kernel](https://github.com/prashantpaddune/android_kernel_samsung_a50dd) — prashantpaddune
-- [Zeus Kernel](https://github.com/THEBOSS619/Note9-Zeus-Q10.0) — THEBOSS619
-- [Galaxy A51 kernel sources](https://github.com/ianmacd/a51xx) — ianmacd
-- [StormBreaker Kernel](https://github.com/stormbreaker-project/kernel_xiaomi_surya) ve [Stratosphere Kernel](https://github.com/Stratosphere-Kernel/android_kernel_xiaomi_surya)
-- [Artemis Kernel](https://github.com/celtare21/kernel_google_coral) — celtare21
-- [GS101/Tensor kernel sources](https://github.com/AndreiLux/GS101) — Google ve AndreiLux
-
-Linux çekirdeğinin özgün belgeleri için [README_Kernel](README_Kernel) dosyasına bakın.
+Hataları [GitHub Issues](hhttps://github.com/denizomer1/mintfresh/issues) üzerinden bildirebilirsiniz.
