@@ -323,7 +323,8 @@ static inline int wait_for_random_bytes(void)
 }
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 0) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 2, 0) && !defined(ISRHEL8)
+#include <linux/random.h>
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 19, 0) && LINUX_VERSION_CODE >= KERNEL_VERSION(4, 2, 0) && !defined(ISRHEL8) && !defined(HAVE_RNG_IS_INITIALIZED)
 #include <linux/random.h>
 #include <linux/slab.h>
 struct rng_is_initialized_callback {
@@ -724,7 +725,7 @@ static inline void *skb_put_data(struct sk_buff *skb, const void *data, unsigned
 #endif
 #endif
 
-#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 17, 0)
+#if LINUX_VERSION_CODE < KERNEL_VERSION(4, 17, 0) && !defined(HAVE_CPU_TO_LE32_ARRAY)
 static inline void le32_to_cpu_array(u32 *buf, unsigned int words)
 {
 	while (words--) {

@@ -794,6 +794,8 @@ struct hid_ll_driver {
 
 	int (*output_report) (struct hid_device *hdev, __u8 *buf, size_t len);
 
+	unsigned int max_buffer_size;
+
 	int (*idle)(struct hid_device *hdev, int report, int idle, int reqtype);
 };
 

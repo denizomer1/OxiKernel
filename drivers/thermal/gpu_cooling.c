@@ -1106,4 +1106,9 @@ regist:
 
 	return ret;
 }
-device_initcall(exynos_gpu_cooling_init);
+/*
+ * The Mali platform driver initializes the Exynos DVFS context from its
+ * device initcall.  Keep cooling registration in the following initcall
+ * level so gpu_dvfs_get_*() cannot run before that context exists.
+ */
+late_initcall(exynos_gpu_cooling_init);
