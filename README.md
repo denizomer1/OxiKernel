@@ -13,7 +13,7 @@ MintFreshed, yalnız Samsung Galaxy A50 için tutulan Exynos 9610 tabanlı Andro
 | Desteklenen cihaz | Samsung Galaxy A50 (`a50`, SM-A505 ailesi) |
 | SoC | Samsung Exynos 9610 |
 | Çekirdek tabanı | Linux 4.14.194 |
-| Desteklenen Android sürümü | Android 12 |
+| Desteklenen Android sürümü | Android 12-16 |
 | ROM türleri | AOSP tabanlı ROM'lar |
 | Mimariler | ARM64 çekirdek, ARM32 uyumluluk katmanı |
 | Derleyici | Proton Clang 13 |
