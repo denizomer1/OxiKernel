@@ -156,9 +156,6 @@ firmware/exynos9610_acpm_tmu.fw
 firmware/sensorhub/shub_bl.fw
 firmware/sensorhub/shub_exynos9610_a50.fw
 firmware/tsp_melfas/mss100_a50.fw
-firmware/tsp_melfas/mss100_a50s.fw
-firmware/tsp_melfas/mss100_a51.fw
-firmware/tsp_melfas/mss100_m30s.fw
 
 # Generated firmware files
 firmware/*.gen.S
