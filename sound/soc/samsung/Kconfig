@@ -203,12 +203,6 @@ config SND_SOC_SAMSUNG_EXYNOS9610
 	help
 		Say Y if you want to add support for audio on the Exynos9610.
 
-config SND_SOC_SAMSUNG_EXYNOS9610_RT5665_ALC5665
-        tristate "Audio support for RT5665(ALC5665) on Exynos9610"
-        select SND_SOC_RT5665
-        select MFD_CS35L41_SPI
-        select SND_SOC_CS35L41
-
 config SND_SOC_SAMSUNG_VOGUE_RT5665
         tristate "Audio support for RT5665 on VOGUE"
         select SND_SOC_RT5665
