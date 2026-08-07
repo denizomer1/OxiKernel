@@ -967,6 +967,8 @@
 
 			i2c@20 {
 				compatible = "i2c-gpio";
+				#address-cells = <1>;
+				#size-cells = <0>;
 				gpios = <&gpp1 2 0
 						&gpp1 3 0>;
 				i2c-gpio,delay-us = <5>;

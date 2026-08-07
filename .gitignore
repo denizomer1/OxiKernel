@@ -129,6 +129,7 @@ kernel/configs/android-*.cfg
 
 # samsung
 *.dtbo
+!scripts/Makefile.dtbo
 *.reverse.dts
 __pycache__/
 *.pyc
