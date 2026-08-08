@@ -11,7 +11,6 @@ if MEDIA_USB_SUPPORT
 if MEDIA_CAMERA_SUPPORT
 	comment "Webcam devices"
 source "drivers/media/usb/uvc/Kconfig"
-source "drivers/media/usb/gspca/Kconfig"
 source "drivers/media/usb/pwc/Kconfig"
 source "drivers/media/usb/cpia2/Kconfig"
 source "drivers/media/usb/zr364xx/Kconfig"
@@ -39,7 +38,6 @@ endif
 
 if I2C && MEDIA_DIGITAL_TV_SUPPORT
 	comment "Digital TV USB devices"
-source "drivers/media/usb/dvb-usb/Kconfig"
 source "drivers/media/usb/dvb-usb-v2/Kconfig"
 source "drivers/media/usb/ttusb-budget/Kconfig"
 source "drivers/media/usb/ttusb-dec/Kconfig"
