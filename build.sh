@@ -172,6 +172,7 @@ BUILD_PACKAGE() {
     script_echo " "
     script_echo "I: Creating kernel ZIP..."
 
+    mkdir -p "$TMP_DIR"
     cp "$OUT_DIR/boot.img" "$TMP_DIR/boot.img"
     cp "$TOP/arch/arm64/boot/dtb_exynos.img" "$TMP_DIR/dtb.img"
     cp -r "$TOP/tools/make/package/META-INF" "$TMP_DIR/META-INF"
