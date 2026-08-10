@@ -14,7 +14,6 @@ SUB_CONFIG_DIR="$TOP/kernel/configs"
 
 # Toolchain options
 BUILD_PREF_COMPILER="clang"
-BUILD_PREF_COMPILER_VERSION="proton"
 
 # Build variables - DO NOT CHANGE
 export ARCH="arm64"
@@ -59,8 +58,8 @@ VERIFY_TOOLCHAIN() {
         script_echo "I: Toolchain found at repository root"
     else
         script_echo "I: Toolchain not found at repository root"
-        script_echo "   Downloading recommended toolchain at \"$TOOLCHAIN\"..."
-        git clone 'https://gitlab.com/TenSeventy7/exynos9610_toolchains_fresh.git' "$TOOLCHAIN" --single-branch -b "$BUILD_PREF_COMPILER_VERSION" --depth 1 2>&1 | sed 's/^/     /'
+        script_echo "   Downloading Proton Clang from kdrag0n/proton-clang..."
+        git clone 'https://github.com/kdrag0n/proton-clang.git' "$TOOLCHAIN" --depth 1 2>&1 | sed 's/^/     /'
     fi
 
     export PATH="${TOOLCHAIN}/bin:$PATH"
@@ -102,21 +101,9 @@ BUILD_KERNEL() {
 
     script_echo " "
 
-    case "$BUILD_PREF_COMPILER_VERSION" in
-    proton)
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j1 drivers/net/wireless/scsc/ LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
-        ;;
-    clang)
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" LLVM=1 "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" LLVM=1 -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
-        ;;
-    *)
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
-        make -C "$TOP" CC="$BUILD_PREF_COMPILER" -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /'
-        ;;
-    esac
+    make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip "$BUILD_DEVICE_TMP_CONFIG" LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
+    make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j1 drivers/net/wireless/scsc/ LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
+    make -C "$TOP" CC="$BUILD_PREF_COMPILER" HOSTCC="clang -Qunused-arguments --ld-path=/usr/bin/ld" HOSTCXX="clang++ -Qunused-arguments --ld-path=/usr/bin/ld" AR=llvm-ar NM=llvm-nm OBJCOPY=llvm-objcopy OBJDUMP=llvm-objdump STRIP=llvm-strip -j$JOBS LOCALVERSION="$LOCALVERSION" 2>&1 | sed 's/^/     /' || exit_script
 
     if [ ! -f "$TOP/arch/arm64/boot/Image" ]; then
         script_echo "E: Image not built successfully!"
