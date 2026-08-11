@@ -77,6 +77,10 @@
 #include "binder_alloc.h"
 #include "binder_trace.h"
 
+#ifdef CONFIG_ANDROID_BINDERFS
+extern int __init init_binderfs(void);
+#endif
+
 #ifdef CONFIG_SAMSUNG_FREECESS
 #include <linux/freecess.h>
 #endif
@@ -155,7 +159,7 @@ enum {
 static uint32_t binder_debug_mask = 0;
 module_param_named(debug_mask, binder_debug_mask, uint, 0644);
 
-static char *binder_devices_param = CONFIG_ANDROID_BINDER_DEVICES;
+char *binder_devices_param = CONFIG_ANDROID_BINDER_DEVICES;
 module_param_named(devices, binder_devices_param, charp, 0444);
 
 static DECLARE_WAIT_QUEUE_HEAD(binder_user_error_wait);
@@ -263,7 +267,7 @@ struct binder_transaction_log {
 	struct binder_transaction_log_entry entry[32];
 };
 static struct binder_transaction_log binder_transaction_log;
-static struct binder_transaction_log binder_transaction_log_failed;
+struct binder_transaction_log binder_transaction_log_failed;
 
 static struct kmem_cache *binder_node_pool;
 static struct kmem_cache *binder_proc_pool;
@@ -6828,7 +6832,7 @@ static int binder_transaction_log_show(struct seq_file *m, void *unused)
 	return 0;
 }
 
-static const struct file_operations binder_fops = {
+const struct file_operations binder_fops = {
 	.owner = THIS_MODULE,
 	.poll = binder_poll,
 	.unlocked_ioctl = binder_ioctl,
@@ -7015,6 +7019,12 @@ static int __init binder_init(void)
 	device_tmp = device_names;
 	while ((device_name = strsep(&device_tmp, ","))) {
 		ret = init_binder_device(device_name);
+		if (ret)
+			goto err_init_binder_device_failed;
+	}
+
+	if (IS_ENABLED(CONFIG_ANDROID_BINDERFS)) {
+		ret = init_binderfs();
 		if (ret)
 			goto err_init_binder_device_failed;
 	}
