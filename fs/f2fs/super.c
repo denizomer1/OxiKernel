@@ -2434,11 +2434,6 @@ static int f2fs_set_knox_context(struct inode *inode, const char *name, const vo
 }
 #endif
 
-static bool f2fs_dummy_context(struct inode *inode)
-{
-	return DUMMY_ENCRYPTION_ENABLED(F2FS_I_SB(inode));
-}
-
 static const struct fscrypt_operations f2fs_cryptops = {
 	.key_prefix	= "f2fs:",
 	.get_context	= f2fs_get_context,
@@ -2450,7 +2445,6 @@ static const struct fscrypt_operations f2fs_cryptops = {
 #ifdef CONFIG_FS_INLINE_ENCRYPTION
 	.get_dun	= __fscrypt_make_dun,
 #endif
-	.dummy_context	= f2fs_dummy_context,
 	.empty_dir	= f2fs_empty_dir,
 	.max_namelen	= F2FS_NAME_LEN,
 };
@@ -3887,4 +3881,3 @@ MODULE_AUTHOR("Samsung Electronics's Praesto Team");
 MODULE_DESCRIPTION("Flash Friendly File System");
 MODULE_LICENSE("GPL");
 MODULE_SOFTDEP("pre: crc32");
-

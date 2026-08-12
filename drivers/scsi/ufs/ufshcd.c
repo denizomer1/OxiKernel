@@ -125,7 +125,7 @@
 	})
 
 /* Called by FS */
-extern void (*ufs_debug_func)(void *);
+void (*ufs_debug_func)(void *);
 
 static int ufs_shutdown_state = 0;
 

@@ -22,7 +22,7 @@
 #include <linux/device.h>
 
 #include <sdp/common.h>
-#include "../../fs/crypto/sdp/sdp_crypto.h"
+#include <sdp/sdp_crypto.h>
 
 // ==== common configs
 #define SDPK_DEFAULT_ALGOTYPE (SDPK_ALGOTYPE_ASYMM_ECDH)

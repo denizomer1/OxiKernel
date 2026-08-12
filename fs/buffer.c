@@ -3544,7 +3544,7 @@ int bh_submit_read_fbe(struct inode *inode, struct buffer_head *bh)
 	get_bh(bh);
 	bh->b_end_io = end_buffer_read_sync;
 
-	bh->b_private = fscrypt_get_bio_cryptd(inode);
+	bh->b_private = NULL;
 	submit_bh(REQ_OP_READ, bh->b_private?REQ_CRYPT:0, bh);
 
 	/* Restore bh->b_private */

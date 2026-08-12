@@ -192,8 +192,7 @@ struct dentry_operations {
 #define DCACHE_OP_WEAK_REVALIDATE	0x00000800
 
 #define DCACHE_NFSFS_RENAMED		0x00001000
-     /* this dentry has been "silly renamed" and has to be deleted on the last
-      * dput() */
+#define DCACHE_ENCRYPTED_NAME		0x02000000 /* Encrypted name (dir key was unavailable) */
 #define DCACHE_COOKIE			0x00002000 /* For use by dcookie subsystem */
 #define DCACHE_FSNOTIFY_PARENT_WATCHED	0x00004000
      /* Parent inode is watched by some fsnotify listener */

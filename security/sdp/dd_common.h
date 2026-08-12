@@ -8,6 +8,7 @@
 #ifndef SECURITY_SDP_DD_COMMON_H_
 #define SECURITY_SDP_DD_COMMON_H_
 
+#include <linux/fscrypt.h>
 #include <sdp/dd.h>
 #include <linux/jiffies.h>
 #include <linux/ratelimit.h>

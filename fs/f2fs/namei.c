@@ -436,22 +436,27 @@ static struct dentry *f2fs_lookup(struct inode *dir, struct dentry *dentry,
 	struct f2fs_dir_entry *de;
 	struct page *page;
 	struct dentry *new;
+	struct fscrypt_name fname = { };
+	struct qstr disk_name;
 	nid_t ino = -1;
 	int err = 0;
 	unsigned int root_ino = F2FS_ROOT_INO(F2FS_I_SB(dir));
 
 	trace_f2fs_lookup_start(dir, dentry, flags);
 
-	err = fscrypt_prepare_lookup(dir, dentry, flags);
+	err = fscrypt_prepare_lookup(dir, dentry, &fname);
 	if (err)
 		goto out;
+	disk_name.name = fname.disk_name.name;
+	disk_name.len = fname.disk_name.len;
+	disk_name.hash = dentry->d_name.hash;
 
 	if (dentry->d_name.len > F2FS_NAME_LEN) {
 		err = -ENAMETOOLONG;
 		goto out;
 	}
 
-	de = f2fs_find_entry(dir, &dentry->d_name, &page);
+	de = f2fs_find_entry(dir, &disk_name, &page);
 	if (!de) {
 		if (IS_ERR(page)) {
 			err = PTR_ERR(page);
@@ -503,11 +508,13 @@ out_splice:
 	new = d_splice_alias(inode, dentry);
 	if (IS_ERR(new))
 		err = PTR_ERR(new);
+	fscrypt_free_filename(&fname);
 	trace_f2fs_lookup_end(dir, dentry, ino, err);
 	return new;
 out_iput:
 	iput(inode);
 out:
+	fscrypt_free_filename(&fname);
 	trace_f2fs_lookup_end(dir, dentry, ino, err);
 	return ERR_PTR(err);
 }
