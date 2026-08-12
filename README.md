@@ -1,7 +1,6 @@
 # OxiKernel
 
-OxiKernel is an AOSP-only Android kernel built exclusively for the **Samsung Galaxy A50** (SM-A505x). It targets AOSP, GSI, and LineageOS-based systems, including the Android 16 compatibility work on the `android-17-test` branch. One UI, other devices, and built-in root solutions are not supported.
-
+OxiKernel is an AOSP-only Android kernel built exclusively for the **Samsung Galaxy A50** (SM-A505x). It targets AOSP, GSI, and LineageOS-based systems,
 > [!WARNING]
 > Flashing a custom kernel can cause bootloops, data loss, or permanent security feature disablement. Back up your data before proceeding. You are solely responsible for any issues that may arise.
 
