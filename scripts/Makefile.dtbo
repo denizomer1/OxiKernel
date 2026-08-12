@@ -1,0 +1,7 @@
+# SPDX-License-Identifier: GPL-2.0
+#
+# Device-tree overlay build rules.
+#
+# DTBO compilation rules are provided by scripts/Makefile.lib.  This file is
+# included by scripts/Makefile.build when the current Kbuild defines dtbo-y.
+# Keep the include target present for trees that build DTBO images.

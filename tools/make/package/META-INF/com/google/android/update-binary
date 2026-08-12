@@ -1,0 +1,47 @@
+#!/sbin/sh
+
+OUTFD="$2"
+ZIPFILE="$3"
+WORKDIR="/tmp/oxikernel"
+BOOT_BLOCK="/dev/block/platform/13520000.ufs/by-name/boot"
+DTB_BLOCK="/dev/block/platform/13520000.ufs/by-name/dtb"
+
+ui_print() {
+    echo "ui_print $*" >&"$OUTFD"
+    echo "ui_print" >&"$OUTFD"
+}
+
+abort() {
+    ui_print "Error: $*"
+    rm -rf "$WORKDIR"
+    exit 1
+}
+
+DEVICE="$(getprop ro.product.device)"
+[ -n "$DEVICE" ] || DEVICE="$(getprop ro.product.vendor.device)"
+[ -n "$DEVICE" ] || DEVICE="$(getprop ro.build.product)"
+
+case "$DEVICE" in
+    a50|a50xx|a50dd|a50ser|a50ltn|a505f) ;;
+    *) abort "This package supports only Samsung Galaxy A50 (detected: $DEVICE)." ;;
+esac
+
+[ -e "$BOOT_BLOCK" ] || abort "Boot partition was not found."
+[ -e "$DTB_BLOCK" ] || abort "DTB partition was not found."
+command -v unzip >/dev/null 2>&1 || abort "Recovery does not provide unzip."
+command -v dd >/dev/null 2>&1 || abort "Recovery does not provide dd."
+
+rm -rf "$WORKDIR"
+mkdir -p "$WORKDIR" || abort "Temporary directory could not be created."
+unzip -o "$ZIPFILE" boot.img dtb.img -d "$WORKDIR" >/dev/null 2>&1 || abort "Package extraction failed."
+
+[ -s "$WORKDIR/boot.img" ] || abort "boot.img is missing."
+[ -s "$WORKDIR/dtb.img" ] || abort "dtb.img is missing."
+
+ui_print "Installing OxiKernel for Galaxy A50..."
+dd if="$WORKDIR/boot.img" of="$BOOT_BLOCK" bs=4096 >/dev/null 2>&1 || abort "Boot installation failed."
+dd if="$WORKDIR/dtb.img" of="$DTB_BLOCK" bs=4096 >/dev/null 2>&1 || abort "DTB installation failed."
+sync
+rm -rf "$WORKDIR"
+ui_print "Installation completed."
+exit 0
