@@ -2,7 +2,7 @@
 
 OUTFD="$2"
 ZIPFILE="$3"
-WORKDIR="/tmp/mintfreshed"
+WORKDIR="/tmp/oxikernel"
 BOOT_BLOCK="/dev/block/platform/13520000.ufs/by-name/boot"
 DTB_BLOCK="/dev/block/platform/13520000.ufs/by-name/dtb"
 
@@ -38,7 +38,7 @@ unzip -o "$ZIPFILE" boot.img dtb.img -d "$WORKDIR" >/dev/null 2>&1 || abort "Pac
 [ -s "$WORKDIR/boot.img" ] || abort "boot.img is missing."
 [ -s "$WORKDIR/dtb.img" ] || abort "dtb.img is missing."
 
-ui_print "Installing MintFreshED for Galaxy A50..."
+ui_print "Installing OxiKernel for Galaxy A50..."
 dd if="$WORKDIR/boot.img" of="$BOOT_BLOCK" bs=4096 >/dev/null 2>&1 || abort "Boot installation failed."
 dd if="$WORKDIR/dtb.img" of="$DTB_BLOCK" bs=4096 >/dev/null 2>&1 || abort "DTB installation failed."
 sync

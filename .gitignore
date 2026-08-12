@@ -141,7 +141,7 @@ arch/arm64/configs/tmp_*defconfig
 out/
 arch/arm64/boot/dtb*.img
 arch/arm64/boot/Image
-Mint*.zip
+OxiKernel-*.zip
 
 # For initramfs
 usr/gen_init_cpio

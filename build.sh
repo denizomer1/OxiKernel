@@ -31,7 +31,7 @@ BUILD_DATE="$(date +%s)"
 BUILD_DEVICE_NAME="a50"
 BUILD_ANDROID_PLATFORM=12
 BUILD_VARIANT="aosp"
-MINT_VARIANT="AOSP"
+OXIKERNEL_VARIANT="AOSP"
 BUILD_KERNEL_PERMISSIVE=false
 
 # Script commands
@@ -39,14 +39,14 @@ script_echo() { echo "  $1"; }
 exit_script() { exit 1; }
 
 merge_config() {
-	if [[ ! -f "$SUB_CONFIG_DIR/mint_$1.config" ]]; then
+	if [[ ! -f "$SUB_CONFIG_DIR/oxikernel_$1.config" ]]; then
 		script_echo "E: Subconfig not found on config DB!"
-		script_echo "   \"$SUB_CONFIG_DIR/mint_$1.config\""
+		script_echo "   \"$SUB_CONFIG_DIR/oxikernel_$1.config\""
 		script_echo "   Make sure it is in the proper directory."
 		script_echo " "
 		exit_script
 	else
-		cat "$SUB_CONFIG_DIR/mint_$1.config" >> "$BUILD_CONFIG_DIR/$BUILD_DEVICE_TMP_CONFIG"
+		cat "$SUB_CONFIG_DIR/oxikernel_$1.config" >> "$BUILD_CONFIG_DIR/$BUILD_DEVICE_TMP_CONFIG"
 	fi
 }
 
@@ -83,16 +83,16 @@ VERIFY_DEFCONFIG() {
 }
 
 SET_ANDROIDVERSION() {
-    echo "CONFIG_MINT_PLATFORM_VERSION=$BUILD_ANDROID_PLATFORM" >> "$BUILD_CONFIG_DIR/$BUILD_DEVICE_TMP_CONFIG"
+    echo "CONFIG_OXIKERNEL_PLATFORM_VERSION=$BUILD_ANDROID_PLATFORM" >> "$BUILD_CONFIG_DIR/$BUILD_DEVICE_TMP_CONFIG"
 }
 SET_LOCALVERSION() {
-    export LOCALVERSION="-MintFreshED-$BUILD_DATE"
+    export LOCALVERSION="-OxiKernel-$BUILD_DATE"
 }
 SET_ZIPNAME() {
-    local MINT_SELINUX
-    MINT_SELINUX="Enforcing"
-    $BUILD_KERNEL_PERMISSIVE && MINT_SELINUX="Permissive"
-    FILE_NAME="MintFreshED-${BUILD_DATE}.A12.AOSP-${MINT_SELINUX}_A50.zip"
+    local OXIKERNEL_SELINUX
+    OXIKERNEL_SELINUX="Enforcing"
+    $BUILD_KERNEL_PERMISSIVE && OXIKERNEL_SELINUX="Permissive"
+    FILE_NAME="OxiKernel-${BUILD_DATE}.A12.AOSP-${OXIKERNEL_SELINUX}_A50.zip"
 }
 
 BUILD_KERNEL() {
@@ -213,7 +213,7 @@ SET_ZIPNAME
 
 # Print build information
 script_echo "I: Selected device:    $BUILD_DEVICE_NAME"
-script_echo "   Selected variant:   $MINT_VARIANT"
+script_echo "   Selected variant:   $OXIKERNEL_VARIANT"
 script_echo "   Kernel version:     $VERSION.$PATCHLEVEL.$SUBLEVEL"
 script_echo "   Android version:    $BUILD_ANDROID_PLATFORM"
 script_echo "   Output file:        $OUT_DIR/$FILE_NAME"
@@ -243,7 +243,7 @@ if $BUILD_KERNEL_PERMISSIVE; then
 	merge_config selinux-permissive
 fi
 
-# Build Mint
+# Build OxiKernel
 BUILD_KERNEL
 BUILD_RAMDISK
 BUILD_IMAGE

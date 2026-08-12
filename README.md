@@ -1,6 +1,6 @@
-# MintFreshED Kernel
+# OxiKernel
 
-MintFreshED is an AOSP-only Android kernel built exclusively for the **Samsung Galaxy A50** (SM-A505x). It targets Android 12 AOSP, GSI, and LineageOS-based systems. One UI, other devices, and built-in root solutions are not supported.
+OxiKernel is an AOSP-only Android kernel built exclusively for the **Samsung Galaxy A50** (SM-A505x). It targets AOSP, GSI, and LineageOS-based systems, including the Android 16 compatibility work on the `android-17-test` branch. One UI, other devices, and built-in root solutions are not supported.
 
 > [!WARNING]
 > Flashing a custom kernel can cause bootloops, data loss, or permanent security feature disablement. Back up your data before proceeding. You are solely responsible for any issues that may arise.
@@ -36,22 +36,22 @@ The device-tree section includes only A50 SWA hardware revisions (`00`, `01`, `0
 
 - Unlocked bootloader
 - TWRP, SHRP, or any compatible custom recovery that can flash ZIP files
-- The correct MintFreshED package for your device and ROM
+- The correct OxiKernel package for your device and ROM
 - Backup of important data and the current `boot` partition
 
 ### Important notes
 
 - Samsung Knox counter may be permanently triggered when the bootloader is unlocked. Banking apps, Secure Folder, and some DRM features may be affected.
-- MintFreshED is built only for LineageOS and other AOSP-based ROMs. Samsung stock firmware and One UI-based ROMs are not supported.
+- OxiKernel is built only for LineageOS and other AOSP-based ROMs. Samsung stock firmware and One UI-based ROMs are not supported.
 - `Enforcing` is recommended for normal use. `Permissive` is for debugging only and is not secure.
 
 ## Installation
 
-1. Download the appropriate MintFreshED ZIP from the `out/` directory.
+1. Download the appropriate OxiKernel ZIP from the `out/` directory.
 2. Copy the package to your phone's internal storage or SD card.
 3. Reboot into recovery mode.
 4. Back up the existing `boot` partition if possible.
-5. Flash the MintFreshED ZIP.
+5. Flash the OxiKernel ZIP.
 6. Reboot directly into the system instead of recovery.
 
 The first boot may take longer than usual. If the device does not boot, return to recovery and restore your backed-up `boot` image or the ROM's original kernel.
@@ -94,8 +94,8 @@ sudo pacman -S --needed \
 ### 2. Clone the repository
 
 ```bash
-git clone https://github.com/denizomer1/mintfresh.git
-cd mintfresh
+git clone https://github.com/denizomer1/oxikernel.git
+cd oxikernel
 ```
 
 ### 3. Start the build
@@ -127,7 +127,7 @@ There are no options for other devices, Android versions, ROM variants, or incre
 
 The build artifacts are written to the `out/` directory:
 
-- `MintFreshED-*.zip`: Minimal package flashable via Galaxy A50 recovery
+- `OxiKernel-*.zip`: Minimal package flashable via Galaxy A50 recovery
 - `boot.img`: Direct boot image for Galaxy A50
 
 The ZIP contains only `boot.img`, `dtb.img`, and a minimal recovery installer specific to the Galaxy A50. It does not include AnyKernel, BusyBox, Magisk, KernelSU, or any root helper tool. The installer checks the device ID only and writes the two images to the corresponding partitions.
@@ -140,7 +140,7 @@ This tree can be used as a standard ARM64 kernel source inside the A50 device tr
 
 - `arch/arm64/configs/exynos9610-a50_core_defconfig`
 - `arch/arm64/configs/exynos9610-a50_default_defconfig`
-- `kernel/configs/mint_*12.config`
+- `kernel/configs/oxikernel_*12.config`
 
 If the ROM build system packages the kernel itself, it must use the same config merge order as in `build.sh`. `build.sh` serves as a standalone reference application for testing and recovery ZIP production.
 
@@ -167,10 +167,10 @@ Verify that the package matches your device, ROM type, and Android version. Then
 When reporting a bug, include the following:
 
 - Exact device model (e.g. `SM-A505F`)
-- MintFreshED version and package name used
+- OxiKernel version and package name used
 - Android and ROM version
 - Baseband version
 - Steps to reproduce the issue
 - Relevant `logcat`, `dmesg`, and `kmsg` logs
 
-Bugs can be reported at [GitHub Issues](https://github.com/denizomer1/mintfresh/issues).
+Bugs can be reported at [GitHub Issues](https://github.com/denizomer1/oxikernel/issues).

@@ -1,0 +1,11 @@
+config OXIKERNEL
+	def_bool y
+	help
+	 This is an OxiKernel build. Enabled by default for OxiKernel trees.
+
+config OXIKERNEL_PLATFORM_VERSION
+	depends on OXIKERNEL
+	int "Android platform version"
+	range 9 17
+	help
+		Android platform version targeted by this OxiKernel build.

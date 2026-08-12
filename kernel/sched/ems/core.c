@@ -297,7 +297,7 @@ int sched_policy_get(struct task_struct *p)
 	int policy = sched_policy[cgroup_idx];
 
 	/* 
-	 * Mint additions - scheduling policy changes
+	 * OxiKernel additions - scheduling policy changes
 	 * 
 	 * Adapt to current schedtune setting for tasks with
 	 * a. device freezing status - SCHED_POLICY_ENERGY

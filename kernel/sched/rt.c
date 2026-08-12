@@ -280,7 +280,7 @@ static void update_activated_cpus(void)
 
 		first_cpu = cpumask_first(&active_cpus);
 
-		/* On Mint, cpu_util() now accounts for RT usage */
+		/* On OxiKernel, cpu_util() now accounts for RT usage */
 		for_each_cpu(cpu, &active_cpus)
 			dom_util_sum += frt_cpu_util(cpu);
 
