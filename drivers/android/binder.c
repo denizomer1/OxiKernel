@@ -77,9 +77,7 @@
 #include "binder_alloc.h"
 #include "binder_trace.h"
 
-#ifdef CONFIG_ANDROID_BINDERFS
 extern int __init init_binderfs(void);
-#endif
 
 #ifdef CONFIG_SAMSUNG_FREECESS
 #include <linux/freecess.h>
