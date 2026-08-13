@@ -36,8 +36,24 @@
 				parameter_size = <0x19000>;
 			};
 
+			reserved-memory {
+				#address-cells = <2>;
+				#size-cells = <1>;
+				ranges;
+
+				ramoops@0x9f000000 {
+					compatible = "ramoops";
+					reg = <0x0 0x9f000000 0x100000>;
+					record-size = <0x40000>;
+					console-size = <0x40000>;
+					ftrace-size = <0x20000>;
+					pmsg-size = <0x20000>;
+					ecc-size = <0>;
+				};
+			};
+
 			chosen {
-				bootargs = "console=ram skip_initramfs rootwait ro init=/init clk_ignore_unused bcm_setup=0xffffff80f8e00000 androidboot.hardware=exynos9610 androidboot.selinux=permissive androidboot.debug_level=0x4948 firmware_class.path=/vendor/firmware ecd_setup=disable reserve-fimc=0xffffff80fa000000 pmic_info=0x3";
+				bootargs = "console=ram skip_initramfs rootwait ro init=/init clk_ignore_unused bcm_setup=0xffffff80f8e00000 androidboot.hardware=exynos9610 androidboot.selinux=enforcing androidboot.debug_level=0x4948 firmware_class.path=/vendor/firmware ecd_setup=disable reserve-fimc=0xffffff80fa000000 pmic_info=0x3";
 				linux,initrd-start = <0x84000000>;
 				linux,initrd-end = <0x841FFFFF>;
 			};

@@ -208,7 +208,11 @@ case "$1" in
 esac
 
 KERNEL_CMDLINE="loop.max_part=7"
-$BUILD_KERNEL_PERMISSIVE && KERNEL_CMDLINE="androidboot.selinux=permissive $KERNEL_CMDLINE"
+if $BUILD_KERNEL_PERMISSIVE; then
+    KERNEL_CMDLINE="androidboot.selinux=permissive $KERNEL_CMDLINE"
+else
+    KERNEL_CMDLINE="androidboot.selinux=enforcing audit=1 $KERNEL_CMDLINE"
+fi
 # Android 16 GSI: the GSI ships its own first-stage init inside /system and the
 # static API-30 ramdisk init in this tree cannot mount the modern GSI system
 # image, which causes a boot-loop ("starts then reboots"). Tell the kernel to
