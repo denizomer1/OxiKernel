@@ -11,7 +11,7 @@ OxiKernel is an AOSP-only Android kernel built exclusively for the **Samsung Gal
 | Supported device | Samsung Galaxy A50 (`a50`, SM-A505 family) |
 | SoC | Samsung Exynos 9610 |
 | Kernel base | Linux 4.14.336 |
-| Supported Android version | Android 16 (API 36) GSI |
+| Supported Android version | Android 11 - Android 16 |
 | ROM types | AOSP-based ROMs only |
 | Architectures | ARM64 kernel, ARM32 compatibility layer |
 | Compiler | Proton Clang 13 (kdrag0n/proton-clang) |
@@ -101,13 +101,13 @@ cd oxikernel
 
 `build.sh` automatically downloads the required Proton Clang toolchain from `kdrag0n/proton-clang` into `toolchain/` on the first run, merges configurations, and produces the package.
 
-For Android 16 (API 36) GSI SELinux enforcing build:
+For SELinux enforcing build:
 
 ```bash
 ./build.sh --enforcing
 ```
 
-For Android 16 (API 36) GSI SELinux permissive build:
+For SELinux permissive build:
 
 ```bash
 ./build.sh --permissive
