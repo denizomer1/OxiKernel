@@ -29,10 +29,17 @@ BUILD_DATE="$(date +%s)"
 
 # Fixed build target
 BUILD_DEVICE_NAME="a50"
-BUILD_ANDROID_PLATFORM=12
+# OxiKernel is pinned to Android 16 (API 36) GSI. The boot-image header and the
+# GSI subconfig are fixed to A16 so a clean vendor can satisfy the GSI's
+# API-level checks. Do not change this unless the kernel base is rebased.
+BUILD_ANDROID_PLATFORM=16
 BUILD_VARIANT="aosp"
 OXIKERNEL_VARIANT="AOSP"
 BUILD_KERNEL_PERMISSIVE=false
+
+# Android 16 (GSI) boot-image header values.
+PLATFORM_VERSION_A16="16.0.0"
+PLATFORM_PATCH_LEVEL_A16="2025-09"
 
 # Script commands
 script_echo() { echo "  $1"; }
@@ -92,7 +99,7 @@ SET_ZIPNAME() {
     local OXIKERNEL_SELINUX
     OXIKERNEL_SELINUX="Enforcing"
     $BUILD_KERNEL_PERMISSIVE && OXIKERNEL_SELINUX="Permissive"
-    FILE_NAME="OxiKernel-${BUILD_DATE}.A12.AOSP-${OXIKERNEL_SELINUX}_A50.zip"
+    FILE_NAME="OxiKernel-${BUILD_DATE}.A${BUILD_ANDROID_PLATFORM}.AOSP-${OXIKERNEL_SELINUX}_A50.zip"
 }
 
 BUILD_KERNEL() {
@@ -183,8 +190,8 @@ BUILD_PACKAGE() {
 show_usage() {
 	script_echo "Usage: $0 <--enforcing|--permissive>"
 	script_echo " "
-	script_echo "--enforcing     Build AOSP 12 with SELinux enforcing."
-	script_echo "--permissive    Build AOSP 12 with SELinux permissive."
+	script_echo "--enforcing     Build Android 16 (API 36) GSI with SELinux enforcing."
+	script_echo "--permissive    Build Android 16 (API 36) GSI with SELinux permissive."
 	exit 1
 }
 # Process the only two supported build modes.
@@ -200,6 +207,11 @@ esac
 
 KERNEL_CMDLINE="loop.max_part=7"
 $BUILD_KERNEL_PERMISSIVE && KERNEL_CMDLINE="androidboot.selinux=permissive $KERNEL_CMDLINE"
+# Android 16 GSI: the GSI ships its own first-stage init inside /system and the
+# static API-30 ramdisk init in this tree cannot mount the modern GSI system
+# image, which causes a boot-loop ("starts then reboots"). Tell the kernel to
+# ignore the ramdisk and let the GSI's /system/bin/init take over.
+KERNEL_CMDLINE="skip_initramfs $KERNEL_CMDLINE"
 
 # Set variables
 source "$DEVICE_DB_DIR/kernel_info.sh"
@@ -207,6 +219,14 @@ source "$DEVICE_DB_DIR/$BUILD_DEVICE_NAME.sh"
 BUILD_DEVICE_CONFIG="exynos9610-${BUILD_DEVICE_NAME}_core_defconfig"
 BUILD_DEVICE_TMP_CONFIG="tmp_exynos9610-${BUILD_DEVICE_NAME}_${BUILD_VARIANT}_defconfig"
 export KCONFIG_BUILTINCONFIG="$BUILD_CONFIG_DIR/exynos9610-${BUILD_DEVICE_NAME}_default_defconfig"
+
+# OxiKernel is pinned to Android 16 GSI. The device-db ships A12 defaults, so
+# the boot-image header must report the matching os_version and patch level or
+# the GSI's first-stage init rejects the image and reboots.
+PLATFORM_VERSION="$PLATFORM_VERSION_A16"
+PLATFORM_PATCH_LEVEL="$PLATFORM_PATCH_LEVEL_A16"
+OXIKERNEL_GSI_SUBCONFIG="gsi-16"
+OXIKERNEL_SELINUX_LABEL="A16"
 
 SET_LOCALVERSION
 SET_ZIPNAME
@@ -231,10 +251,12 @@ script_echo "I: Clean build!"
 touch "$TOP/.config"
 make CC="$BUILD_PREF_COMPILER" mrproper 2>&1 | sed 's/^/     /' || exit_script
 
-# Merge subconfigs
-merge_config "partial-deknox-$BUILD_ANDROID_PLATFORM"
-merge_config "mali-$BUILD_ANDROID_PLATFORM"
+# Merge subconfigs. partial-deknox and mali are platform-independent, so they
+# use fixed names; only the GSI subconfig is selected per Android version.
+merge_config "partial-deknox"
+merge_config "mali"
 merge_config "variant_$BUILD_VARIANT"
+merge_config "$OXIKERNEL_GSI_SUBCONFIG"
 
 if $BUILD_KERNEL_PERMISSIVE; then
 	script_echo "WARNING! You're building this kernel in permissive mode!"
