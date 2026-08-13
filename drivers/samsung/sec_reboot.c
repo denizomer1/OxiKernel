@@ -220,9 +220,12 @@ static void sec_reboot(enum reboot_mode reboot_mode, const char *cmd)
 			exynos_pmu_write(SEC_DEBUG_PANIC_INFORM, SEC_RESET_CP_DBGMEM | 0x2);
 		else if (!strncmp(cmd, "panic", 5)) {
 			/*
-			 * This line is intentionally blanked because the PANIC INFORM is used for upload cause
-			 * in sec_debug_set_upload_cause() only in case of  panic() .
+			 * On Android 16, "adb reboot recovery" reaches the kernel with
+			 * cmd="panic" (init translates sys.powerctl=reboot,recovery into a
+			 * panic-style reboot). Route it to recovery so the bootloader
+			 * enters recovery mode instead of a normal boot.
 			 */
+			exynos_pmu_write(SEC_DEBUG_PANIC_INFORM, SEC_RESET_REASON_RECOVERY);
 		} else
 			exynos_pmu_write(SEC_DEBUG_PANIC_INFORM, SEC_RESET_REASON_UNKNOWN);
 	} else {
