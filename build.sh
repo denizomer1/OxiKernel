@@ -209,7 +209,7 @@ esac
 
 KERNEL_CMDLINE="loop.max_part=7"
 if $BUILD_KERNEL_PERMISSIVE; then
-    KERNEL_CMDLINE="androidboot.selinux=permissive $KERNEL_CMDLINE"
+    KERNEL_CMDLINE="androidboot.selinux=permissive audit=1 $KERNEL_CMDLINE"
 else
     KERNEL_CMDLINE="androidboot.selinux=enforcing audit=1 $KERNEL_CMDLINE"
 fi
