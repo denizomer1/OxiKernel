@@ -116,8 +116,8 @@ For SELinux permissive build:
 ### Build options
 
 ```text
---enforcing     Produces an Android 16 (API 36) GSI kernel with SELinux enforcing.
---permissive    Produces an Android 16 (API 36) GSI kernel with SELinux permissive (not recommended).
+--enforcing     Produces kernel with SELinux enforcing.
+--permissive    Produces kernel with SELinux permissive (not recommended).
 ```
 
 OxiKernel is pinned to Android 16 GSI. There are no options for other Android versions, devices, ROM variants, or incremental builds. The script always performs a clean build.
