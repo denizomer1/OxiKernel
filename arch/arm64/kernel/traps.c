@@ -178,6 +178,7 @@ void dump_backtrace(struct pt_regs *regs, struct task_struct *tsk)
 #endif
 			dbg_snapshot_save_log(raw_smp_processor_id(), regs->pc);
 		}
+		cnt++;
 	} while (!unwind_frame(tsk, &frame));
 
 	put_task_stack(tsk);
@@ -239,6 +240,7 @@ static void dump_backtrace_auto_summary(struct pt_regs *regs, struct task_struct
 			dump_backtrace_entry(regs->pc);
 			dbg_snapshot_save_log(raw_smp_processor_id(), regs->pc);
 		}
+		cnt++;
 	} while (!unwind_frame(tsk, &frame));
 
 	put_task_stack(tsk);
