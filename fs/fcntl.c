@@ -25,8 +25,6 @@
 #include <linux/user_namespace.h>
 #include <linux/shmem_fs.h>
 #include <linux/compat.h>
-#include <linux/task_integrity.h>
-#include <linux/proca.h>
 
 #include <asm/poll.h>
 #include <asm/siginfo.h>

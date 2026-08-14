@@ -73,12 +73,6 @@ struct fscrypt_operations {
 	int (*get_num_devices)(struct super_block *sb);
 	void (*get_devices)(struct super_block *sb,
 			    struct request_queue **devs);
-#ifdef CONFIG_SDP
-	int (*get_knox_context)(struct inode *inode, const char *name,
-				void *buffer, size_t buffer_size);
-	int (*set_knox_context)(struct inode *inode, const char *name,
-				const void *value, size_t size, void *fs_data);
-#endif
 };
 
 static inline bool fscrypt_has_encryption_key(const struct inode *inode)
