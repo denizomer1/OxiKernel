@@ -416,9 +416,6 @@ struct address_space {
 	struct list_head	private_list;	/* for use by the address_space */
 	void			*private_data;	/* ditto */
 	errseq_t		wb_err;
-#if defined(CONFIG_SDP) && !defined(CONFIG_FSCRYPT_SDP)
-	int userid;
-#endif
 } __attribute__((aligned(sizeof(long)))) __randomize_layout;
 	/*
 	 * On most architectures that alignment is already the case; but
@@ -909,9 +906,6 @@ struct file {
 #endif /* #ifdef CONFIG_EPOLL */
 	struct address_space	*f_mapping;
 	errseq_t		f_wb_err;
-#if defined(CONFIG_FIVE_PA_FEATURE) || defined(CONFIG_PROCA)
-	void *f_signature;
-#endif
 } __randomize_layout
   __attribute__((aligned(8)));
 

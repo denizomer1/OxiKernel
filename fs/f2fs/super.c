@@ -35,10 +35,6 @@
 #define CREATE_TRACE_POINTS
 #include <trace/events/f2fs.h>
 
-#ifdef CONFIG_FSCRYPT_SDP
-#include <linux/fscrypto_sdp_cache.h>
-#endif
-
 static struct kmem_cache *f2fs_inode_cachep;
 
 #ifdef CONFIG_F2FS_FAULT_INJECTION
@@ -1073,12 +1069,6 @@ static int f2fs_drop_inode(struct inode *inode)
 		return 0;
 	}
 	ret = generic_drop_inode(inode);
-#ifdef CONFIG_FSCRYPT_SDP
-	if (!ret && fscrypt_sdp_is_locked_sensitive_inode(inode)) {
-		fscrypt_sdp_drop_inode(inode);
-		ret = 1;
-	}
-#endif
 	trace_f2fs_drop_inode(inode, ret);
 	return ret;
 }
@@ -2420,28 +2410,10 @@ static int f2fs_set_context(struct inode *inode, const void *ctx, size_t len,
 				ctx, len, fs_data, XATTR_CREATE);
 }
 
-#if defined(CONFIG_DDAR) || defined(CONFIG_FSCRYPT_SDP)
-static int f2fs_get_knox_context(struct inode *inode, const char *name, void *val, size_t len)
-{
-	return f2fs_getxattr(inode, F2FS_XATTR_INDEX_ENCRYPTION,
-			name, val, len, NULL);
-}
-
-static int f2fs_set_knox_context(struct inode *inode, const char *name, const void *val, size_t len, void *fs_data)
-{
-	return f2fs_setxattr(inode, F2FS_XATTR_INDEX_ENCRYPTION,
-			name ? name : F2FS_XATTR_NAME_ENCRYPTION_CONTEXT, val, len, fs_data, 0);
-}
-#endif
-
 static const struct fscrypt_operations f2fs_cryptops = {
 	.key_prefix	= "f2fs:",
 	.get_context	= f2fs_get_context,
 	.set_context	= f2fs_set_context,
-#if defined(CONFIG_DDAR) || defined(CONFIG_FSCRYPT_SDP)
-	.get_knox_context = f2fs_get_knox_context,
-	.set_knox_context = f2fs_set_knox_context,
-#endif
 #ifdef CONFIG_FS_INLINE_ENCRYPTION
 	.get_dun	= __fscrypt_make_dun,
 #endif
@@ -3391,9 +3363,6 @@ try_onemore:
 	sb->s_time_gran = 1;
 	sb->s_flags = (sb->s_flags & ~MS_POSIXACL) |
 		(test_opt(sbi, POSIX_ACL) ? MS_POSIXACL : 0);
-#ifdef CONFIG_FIVE
-	sb->s_flags |= SB_I_VERSION;
-#endif
 	memcpy(&sb->s_uuid, raw_super->uuid, sizeof(raw_super->uuid));
 	sb->s_iflags |= SB_I_CGROUPWB;
 

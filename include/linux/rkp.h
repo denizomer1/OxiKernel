@@ -183,9 +183,6 @@ extern sparse_bitmap_for_kernel_t* rkp_s_bitmap_ro;
 extern sparse_bitmap_for_kernel_t* rkp_s_bitmap_dbl;
 extern sparse_bitmap_for_kernel_t* rkp_s_bitmap_buffer;
 
-#ifdef CONFIG_KNOX_KAP
-extern int boot_mode_security;
-#endif
 #ifdef CONFIG_RKP_KDP
 extern int rkp_cred_enable;
 #endif

@@ -257,9 +257,9 @@ script_echo "I: Clean build!"
 touch "$TOP/.config"
 make CC="$BUILD_PREF_COMPILER" mrproper 2>&1 | sed 's/^/     /' || exit_script
 
-# Merge subconfigs. partial-deknox and mali are platform-independent, so they
+# Merge subconfigs. partial-security and mali are platform-independent, so they
 # use fixed names; only the GSI subconfig is selected per Android version.
-merge_config "partial-deknox"
+merge_config "partial-security"
 merge_config "mali"
 merge_config "variant_$BUILD_VARIANT"
 merge_config "$OXIKERNEL_GSI_SUBCONFIG"
