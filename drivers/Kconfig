@@ -228,7 +228,6 @@ source "drivers/vision/Kconfig"
 
 source "drivers/sensorhub/Kconfig"
 
-source "drivers/security/samsung/five_tee_driver/Kconfig"
 
 source "drivers/icdrv/Kconfig"
 

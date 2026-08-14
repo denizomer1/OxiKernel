@@ -204,7 +204,6 @@ obj-$(CONFIG_ANDROID_TIMED_OUTPUT)	+= motor/
 obj-$(CONFIG_SENSORS_SSP) += sensorhub/
 
 # FIVE TEE driver
-obj-$(CONFIG_FIVE_TEE_DRIVER)	+= security/samsung/five_tee_driver/
 obj-$(CONFIG_ICD)		+= icdrv/
 
 # uH
