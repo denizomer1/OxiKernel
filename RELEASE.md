@@ -25,7 +25,6 @@ OxiKernel fixes all of this by **backporting from reference kernels** (Motorola 
 
 | Feature | Status | Description |
 |---------|--------|-------------|
-| **SEC_REBOOT** | ✅ Active | Registers `pm_power_off` + `arm_pm_restart`. Power button now actually powers off; `reboot recovery` works |
 | **SYSVIPC + IPC_NS** | ✅ Active | Android 16 GSI IPC namespaces support |
 | **ENCRYPTED_KEYS** | ✅ Active | FBE / metadata encryption keyring |
 | **Inline Crypto Stack** | ✅ Backported | From Motorola 4.14.357-openela: `dm-default-key`, `blk-crypto`, `bio-crypt-ctx`, `keyslot-manager`, `inline_crypt` |
