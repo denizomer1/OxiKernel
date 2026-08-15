@@ -219,6 +219,9 @@ fi
 # ignore the ramdisk and let the GSI's /system/bin/init take over.
 KERNEL_CMDLINE="skip_initramfs $KERNEL_CMDLINE"
 
+# Increase hardware watchdog timeout from 15s to 60s (prevents early boot panic on Exynos9610)
+KERNEL_CMDLINE="s3c2410_wdt.tmr_margin=60 $KERNEL_CMDLINE"
+
 # Set variables
 source "$DEVICE_DB_DIR/kernel_info.sh"
 source "$DEVICE_DB_DIR/$BUILD_DEVICE_NAME.sh"
