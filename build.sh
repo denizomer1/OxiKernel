@@ -219,8 +219,12 @@ fi
 # ignore the ramdisk and let the GSI's /system/bin/init take over.
 KERNEL_CMDLINE="skip_initramfs $KERNEL_CMDLINE"
 
-# Increase hardware watchdog timeout from 15s to 60s (prevents early boot panic on Exynos9610)
-KERNEL_CMDLINE="s3c2410_wdt.tmr_margin=60 $KERNEL_CMDLINE"
+# Disable ALL watchdogs and lockup detectors (prevents ~54s panic on Exynos9610)
+# nowatchdog: disables soft/hard lockup detectors
+# hardlockup_panic=0: don't panic on hard lockup
+# nmi_watchdog=0: disable NMI watchdog
+# s3c2410_wdt.tmr_margin=60: legacy, driver now disabled
+KERNEL_CMDLINE="nowatchdog hardlockup_panic=0 nmi_watchdog=0 s3c2410_wdt.tmr_margin=60 $KERNEL_CMDLINE"
 
 # Set variables
 source "$DEVICE_DB_DIR/kernel_info.sh"
